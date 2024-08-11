@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <title>ALBUM CREATE</title>
+    </head>
+    <body>
+        <form action="/album/create" method="POST">
+            <label for="albumName">
+                TITLE : 
+                <input type="text" id="albumName" name="albumName" required>
+            </label>
+            <br><br>
+            <label for="artist">SELECT ARTIST : 
+                <select name="artist" id="artist" required> 
+
+                    <% for(let i = 0 ; i < allArtists.length ; i++){ %>
+                        <option value= <%=allArtists[i].id %> > <%=allArtists[i].firstname %> </option>
+    
+                    <%}%>
+    
+                </select> 
+
+            </label>
+            <br><br>
+            <label for="label">SELECT LABEL : 
+                <select name="label" id="label" required>
+
+                    <% for(let i = 0 ; i < allLabels.length ; i++){ %>
+                        <option value= <%=allLabels[i].id %> > <%=allLabels[i].labelname %> </option>
+    
+                    <%}%>
+    
+                </select> 
+
+            </label>
+            <br><br>
+            <label for="genre">SELECT GENRE : 
+                <select name="genre" id="genre" required>
+
+                    <% for(let i = 0 ; i < allGenres.length ; i++){ %>
+                        <option value= <%=allGenres[i].id %> > <%=allGenres[i].genrename %> </option>
+    
+                    <%}%>
+    
+                </select> 
+
+            </label>
+            <br><br>
+            <label for="releaseDate">RELEASE DATE
+                <input type="date" name="releaseDate" id="releaseDate" required>
+            </label>
+            <br><br>
+
+            <label for="imageUrl">Image Url :
+                <br> <input type="url" name="imageUrl" id="imageUrl" placeholder="https://example.com" pattern="https://.*"  >
+            </label>
+           
+            <br><br>
+            <button type="submit">CREATE ALBUM</button>
+        </form>
+    </body>
+</html>

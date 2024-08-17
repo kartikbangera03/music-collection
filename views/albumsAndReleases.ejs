@@ -1,0 +1,10 @@
+<h2>Albums</h2>
+<% for(let i=0;i<allAlbums.length ; i++) { %>
+    <a href="/artist/<%=allAlbums[i].id%>"><%=allAlbums[i].albumname%></a><br><br>
+<%}%>
+<h2>Releases</h2>
+<% for(let i=0;i<allReleases.length ; i++) { %>
+    <a href="/artist/<%=allReleases[i].id%>"><%=allReleases[i].albumname%></a>
+    <p>Format : <%=allReleases[i].format%></p>
+    <br><br>
+<%}%>

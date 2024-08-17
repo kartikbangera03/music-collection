@@ -1,0 +1,11 @@
+<html>
+    <head>
+        <title>ALL Genres</title>
+    </head>
+    <body>
+        <br><br>
+        <% for(let i=0;i<allGenres.length ; i++) { %>
+            <a href="/genre/<%=allGenres[i].id%>"><%=allGenres[i].genrename%></a><br><br>
+        <%}%>
+    </body>
+</html>

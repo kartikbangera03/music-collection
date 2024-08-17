@@ -1,0 +1,11 @@
+<html>
+    <title>
+        Artist Details
+    </title>
+    <body>
+        <span><%= artist[0].firstname %></span>
+        <a href="/artist/<%=artist[0].id%>/update">Edit</a><br><br>
+        <a href="/artist/<%=artist[0].id%>/delete">Delete</a><br><br>
+    </body>
+    <%- include("albumsAndReleases" ,{allAlbums : allAlbums,allReleases : allReleases }) %>
+</html>

@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>ALL Releases</title>
+    </head>
+    <body>
+        <br><br>
+        <!-- <% for(let i=0;i<allReleases.length ; i++) { %>
+            <a href="/release/<%=allReleases[i].id%>"><%=allReleases[i].albumname%></a>
+            <p>Format : <%=allReleases[i].format%></p>
+        <%}%> -->
+
+
+        <% allReleases.forEach((release)=>{ %>
+            <a href="/release/<%=release.id%>"> <%=release.albumname%> - <%=release.format%></a><br><br>
+        <%})%>
+    </body>
+</html>

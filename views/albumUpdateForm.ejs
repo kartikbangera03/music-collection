@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <title>ALBUM UPdate</title>
+    </head>
+    <body>
+        <form action="/album/<%=album[0].id%>/update" method="POST">
+            <label for="albumName">
+                TITLE : 
+                <input type="text" id="albumName" name="albumName" value= "<%=album[0].albumname%>" required>
+            </label>
+            <br><br>
+            <label for="artist">SELECT ARTIST : 
+                <select name="artist" id="artist" required>                
+                    <% allArtists.forEach((artist)=>{ %>
+                            <option value= "<%=artist.id%>"  <%=artist.id === album[0].artist_id ? 'selected' : '' %> > <%=artist.firstname%> </option>  
+                    <% }) %>
+                </select> 
+
+            </label>
+            <br><br>
+            <label for="label">SELECT LABEL : 
+                <select name="label" id="label" required>
+                    <% allLabels.forEach((label)=>{ %>
+                        <option value= "<%=label.id%>"  <%=label.id === album[0].label_id ? 'selected' : '' %> > <%=label.labelname%> </option>  
+                    <% }) %>
+                </select> 
+
+            </label>
+            <br><br>
+            <label for="genre">SELECT GENRE : 
+                <select name="genre" id="genre" required>
+                    <% allGenres.forEach((genre)=>{ %>
+                        <option value= "<%=genre.id%>"  <%=genre.id === album[0].genre_id ? 'selected' : '' %> > <%=genre.genrename%> </option>  
+                    <% }) %>
+                </select> 
+
+            </label>
+            <br><br>
+            <label for="releaseDate">RELEASE DATE
+                <input type="date" name="releaseDate" id="releaseDate" value=<%=releaseDate%>  required>
+            </label>
+            <br><br>
+
+            <label for="imageUrl">Image Url :
+                <br> <input type="url" name="imageUrl" id="imageUrl" placeholder="https://example.com" pattern="https://.*" value="<%=album[0].imageurl%>" >
+            </label>
+           
+            <br><br>
+            <button type="submit">Update ALBUM</button>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,11 @@
+<html>
+    <head>
+        <title>ALL ARTISTS</title>
+    </head>
+    <body>
+        <br><br>
+        <% for(let i=0;i<allArtists.length ; i++) { %>
+            <a href="/artist/<%=allArtists[i].id%>"><%=allArtists[i].firstname%></a><br><br>
+        <%}%>
+    </body>
+</html>

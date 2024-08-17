@@ -10,6 +10,30 @@ async function insertArtist(firstName , lastName ,  birthDate , deathDate, count
    [firstName , lastName ,  birthDate , deathDate, country , imageUrl]);
 }
 
+
+
+async function getArtistById(id){
+  const {rows} = await pool.query("SELECT * FROM artists WHERE id = ($1)",[id]);
+  return rows;
+}
+
+async function getAlbumsByArtistId(id){
+  const { rows } = await pool.query("SELECT * FROM albums where artist_id = ($1)",[id]);
+  return rows;
+}
+
+async function getAllAlbumsAndReleasesByArtistId(id){
+  const { rows } = await pool.query(`
+    SELECT * 
+    FROM albums
+    JOIN releases
+    ON releases.album_id = albums.id
+    where albums.artist_id = ($1)`,[id]);
+  return rows;
+
+}
+
+
 async function getAllLabels() {
   const { rows } = await pool.query("SELECT * FROM labels");
   return rows;
@@ -32,7 +56,10 @@ async function insertGenre(genreName) {
 
 async function getAllAlbums(){
   const { rows } = await pool.query("SELECT * FROM albums");
-  return rows;
+  return rows;async function updateArtist( id,firstName , lastName ,  birthDate , deathDate, country , imageUrl) {
+    await pool.query("INSERT INTO artists (firstName , lastName , birthDate , deathDate , country , imageURL) VALUES ($1,$2,$3,$4,$5,$6)",
+     [firstName , lastName ,  birthDate , deathDate, country , imageUrl]);
+  }
 }
 
 async function insertAlbum(albumName , artist , label , genre , releaseDate , imageUrl){
@@ -41,7 +68,12 @@ async function insertAlbum(albumName , artist , label , genre , releaseDate , im
 }
 
 async function getAllReleases(){
-  const { rows } = await pool.query("SELECT * FROM releases");
+  const { rows } = await pool.query("SELECT releases.id, albums.albumname , releases.format,releases.album_id FROM releases JOIN albums on releases.album_id = albums.id");
+  return rows;
+}
+
+async function getReleaseById(id){
+  const { rows } = await pool.query("SELECT releases.id, albums.albumname , releases.format,releases.album_id , releases.format, releases.price , releases.stock , releases.barcode , releases.imageurl FROM releases JOIN albums on releases.album_id = albums.id WHERE releases.id = ($1)",[id]);
   return rows;
 }
 
@@ -49,6 +81,124 @@ async function insertRelease(album , format , price , stock ,barcode , imageUrl)
   await pool.query("INSERT INTO releases(album_id , format , price , stock ,barcode  , imageURL) VALUES ($1,$2,$3,$4,$5,$6)",
   [album , format , price , stock ,barcode  , imageUrl]);
 }
+
+async function getAlbumById(id){
+  const { rows } = await pool.query("SELECT * FROM albums WHERE albums.id = ($1)",[id]);
+  return rows;
+}
+
+async function getReleasesByAlbumId(id){
+  const { rows } = await pool.query("SELECT * FROM releases WHERE releases.album_id = ($1)",[id]);
+  return rows;
+}
+
+async function getAlbumsByLabelId(id){
+  const { rows } = await pool.query("SELECT * FROM albums WHERE albums.label_id = ($1)",[id]);
+  return rows;
+}
+
+async function getLabelById(id){
+  const {rows} = await pool.query("SELECT * FROM labels WHERE id = ($1)",[id]);
+  return rows;
+}
+
+async function getGenreById(id){
+  const {rows} = await pool.query("SELECT * FROM genres WHERE id = ($1)",[id]);
+  return rows;
+}
+
+async function getAlbumsByGenreId(id){
+  const { rows } = await pool.query("SELECT * FROM albums WHERE albums.genre_id = ($1)",[id]);
+  return rows;
+}
+
+async function getAllAlbumsAndReleasesByLabelId(id){
+  const { rows } = await pool.query(`
+    SELECT * 
+    FROM albums
+    JOIN releases
+    ON releases.album_id = albums.id
+    where albums.label_id = ($1)`,[id]);
+  return rows;
+
+}
+
+
+async function getAllAlbumsAndReleasesByGenreId(id){
+  const { rows } = await pool.query(`
+    SELECT * 
+    FROM albums
+    JOIN releases
+    ON releases.album_id = albums.id
+    where albums.genre_id = ($1)`,[id]);
+  return rows;
+
+}
+
+async function updateArtist( id,firstName , lastName ,  birthDate , deathDate, country , imageUrl) {
+  await pool.query(`
+  UPDATE artists
+  SET firstName = ($2) , 
+  lastName = ($3), 
+  birthDate = ($4), 
+  deathDate = ($5), 
+  country = ($6), 
+  imageURL = ($7) 
+  WHERE artists.id = ($1)`,
+   [id,firstName , lastName ,  birthDate , deathDate, country , imageUrl]);
+}
+
+async function updateAlbum( id,albumName , artist , label , genre , releaseDate , imageUrl) {
+  await pool.query(`
+  UPDATE albums
+  SET 
+  albumname = ($2) , 
+  artist_id = ($3), 
+  label_id = ($4), 
+  genre_id = ($5),  
+  imageURL = ($7) ,
+  releasedate = ($6)
+  WHERE albums.id = ($1)`,
+   [id,albumName , artist , label , genre , releaseDate , imageUrl]);
+}
+
+async function updateLabel(id, labelName , yearFounded) {
+  await pool.query(`
+  UPDATE labels
+  SET
+  labelname = ($2),
+  yearfounded = ($3)
+  WHERE labels.id = ($1)
+  `,
+   [id, labelName , yearFounded]);
+}
+
+async function updateGenre(id, genrename) {
+  await pool.query(`
+  UPDATE genres
+  SET
+  genrename = ($2)
+  WHERE genres.id = ($1)
+  `,
+   [id, genrename]);
+}
+
+
+async function updateRelease(id , album , format , price , stock ,barcode , imageUrl) {
+  await pool.query(`
+  UPDATE releases
+  SET
+  album_id = ($2),
+  format = ($3),
+  price = ($4),
+  stock = ($5),
+  barcode = ($6),
+  imageurl = ($7)
+  WHERE releases.id = ($1)
+  `,
+   [id , album , format , price , stock ,barcode , imageUrl]);
+}
+
 
 module.exports = {
   getAllArtists,
@@ -59,6 +209,24 @@ module.exports = {
   getAllGenres,
   getAllAlbums,
   insertAlbum,
-  getAllReleases, insertRelease
+  getAllReleases, 
+  insertRelease,
+  getArtistById,
+  getAlbumsByArtistId,
+  getAllAlbumsAndReleasesByArtistId,
+  getAlbumById,
+  getReleasesByAlbumId,
+  getAlbumsByLabelId,
+  getLabelById,
+  getAllAlbumsAndReleasesByLabelId,
+  getGenreById,
+  getAlbumsByGenreId,
+  getAllAlbumsAndReleasesByGenreId,
+  getReleaseById,
+  updateArtist,
+  updateAlbum,
+  updateLabel,
+  updateGenre,
+  updateRelease
 };
 

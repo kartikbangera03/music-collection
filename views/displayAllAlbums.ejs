@@ -1,0 +1,11 @@
+<html>
+    <head>
+        <title>ALL ALBUMS</title>
+    </head>
+    <body>
+        <br><br>
+        <% for(let i=0;i<allAlbums.length ; i++) { %>
+            <a href="/album/<%=allAlbums[i].id%>"><%=allAlbums[i].albumname%></a><br><br>
+        <%}%>
+    </body>
+</html>

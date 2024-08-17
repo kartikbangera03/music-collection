@@ -3,16 +3,17 @@
         <title>Artist Create</title>
     </head>
     <body>
-        <form action="/label/create" method="POST">
+        <form method="POST">
             <label for="labelName">Label Name :
-                <br><input type="text" name="labelName" id="labelName" required>
+                <br><input type="text" name="labelName" id="labelName" required  value= <%=typeof label === "undefined" ? "" : label[0].labelname  %> >
             </label>
             <br><br>
             <label for="yearFounded">Year Founded :
-                <br><input type="number" name="yearFounded" id="yearFounded" required>
+                <br><input type="number" name="yearFounded" id="yearFounded" required value= <%=typeof label === "undefined" ? "" : label[0].yearfounded  %> >
             </label>
             <br><br>
-            <button type="submit">Create Label</button>
+            <button type="submit"><%=typeof label === "undefined" ? "Create Label" : "Update Label"  %></button>
         </form>
     </body>
 </html>
+

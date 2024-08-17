@@ -3,9 +3,9 @@
         <title>Genre Create</title>
     </head>
     <body>
-        <form action="/genre/create" method="POST">
+        <form method="POST">
             <label for="genreName">Label Name :
-                <br><input type="text" name="genreName" id="genreName" required>
+                <br><input type="text" name="genreName" id="genreName" required value= <%= typeof genre === "undefined" ? "" : genre[0].genrename %> >
             </label>
             <br><br>
             <button type="submit">Create Genre</button>

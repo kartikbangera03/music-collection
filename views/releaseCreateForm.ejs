@@ -3,43 +3,43 @@
         <title>RELEASE CREATE</title>
     </head>
     <body>
-        <form action="/release/create" method="POST">
+        <form  method="POST">
             <label for="album">SELECT ALBUM : 
                 <select name="album" id="album" required>
 
-                    <% for(let i = 0 ; i < allAlbums.length ; i++){ %>
-                        <option value= <%=allAlbums[i].id %> > <%=allAlbums[i].albumname %> </option>
     
-                    <%}%>
-    
+                    <% allAlbums.forEach((album)=>{ %>
+                        <option value="<%=album.id%>"  <%= typeof release !== "undefined" &&  album.id === release[0].album_id ? 'selected' : '' %> > <%=album.albumname%> </option>  
+                    <% }) %>
+
                 </select> 
 
             </label>
             <br><br>
             <select name="format" id="format">Format: 
-                <option value="CD">CD</option>
-                <option value="Vinyl">Vinyl</option>
-                <option value="Cassette">Cassette</option>
-                <option value="Digital">Digital</option>
+                <option value="CD" <%= typeof release !== "undefined" && "CD" === release[0].format? 'selected' : '' %> >CD</option>
+                <option value="Vinyl" <%= typeof release !== "undefined" && "Vinyl" === release[0].format ? 'selected' : '' %> >Vinyl</option>
+                <option value="Cassette" <%= typeof release !== "undefined" && "Cassette" === release[0].format ? 'selected' : '' %> >Cassette</option>
+                <option value="Digital" <%= typeof release !== "undefined" && "Digital" === release[0].format ? 'selected' : '' %> >Digital</option>
             </select>
             <br><br>
             <label for="price">
                 Price : 
-                <input type="number" id="price" name="price" required>
+                <input type="number" id="price" name="price" required value= <%=typeof release === "undefined" ? "" : release[0].price  %>>
             </label>
             <br><br>
             <label for="stock">
                 Stock : 
-                <input type="number" id="stock" name="stock" required>
+                <input type="number" id="stock" name="stock" required value= <%=typeof release === "undefined" ? "" : release[0].stock  %>>
             </label>
             <br><br>
             <label for="barcode">
                 Barcode : 
-                <input type="text" id="barcode" name="barcode" >
+                <input type="text" id="barcode" name="barcode" value= <%=typeof release === "undefined" ? "" : release[0].barcode  %>>
             </label>
             <br><br>
             <label for="imageUrl">Image Url :
-                <br> <input type="url" name="imageUrl" id="imageUrl" placeholder="https://example.com" pattern="https://.*"  >
+                <br> <input type="url" name="imageUrl" id="imageUrl" placeholder="https://example.com" pattern="https://.*" value= <%=typeof release === "undefined" ? "" : release[0].imageurl  %> >
             </label>
             <br><br>
             <button type="submit">Create Instance</button>

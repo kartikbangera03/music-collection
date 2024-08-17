@@ -1,0 +1,12 @@
+<html>
+    <title>
+        Genre Details
+    </title>
+    <body>
+        <span><%= genre[0].genrename %></span>
+        <a href="/genre/<%=genre[0].id%>/update">Edit</a><br><br>
+        <a href="/genre/<%=genre[0].id%>/delete">Delete</a><br><br>
+        <%- include("albumsAndReleases" ,{allAlbums : allAlbums,allReleases : allReleases }) %>
+    </body>
+    
+</html>

@@ -1,0 +1,11 @@
+<html>
+    <head>
+        <title>ALL Labels</title>
+    </head>
+    <body>
+        <br><br>
+        <% for(let i=0;i<allLabels.length ; i++) { %>
+            <a href="/label/<%=allLabels[i].id%>"><%=allLabels[i].labelname%></a><br><br>
+        <%}%>
+    </body>
+</html>

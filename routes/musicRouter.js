@@ -24,4 +24,38 @@ router.get("/release/create" , releaseController.releaseCreateGet);
 router.post("/release/create" , releaseController.releaseCreatePost);
 
 
+router.get("/category/artists" , artistController.displayArtists);
+router.get("/category/albums" , albumController.displayAlbums);
+router.get("/category/labels" , labelController.displayLabels);
+router.get("/category/genres" , genreController.displayGenres);
+router.get("/category/releases" , releaseController.displayReleases);
+
+router.get("/artist/:id", artistController.getArtistById);
+router.get("/artist/:id/update", artistController.updateArtistById);
+router.post("/artist/:id/update", artistController.updateArtistByIdPost);
+router.get("/artist/:id/delete", artistController.deleteArtistById);
+
+
+router.get("/album/:id", albumController.getAlbumById);
+router.get("/album/:id/update", albumController.updateAlbumById);
+router.post("/album/:id/update", albumController.updateAlbumByIdPost);
+// router.get("/album/:id/delete", albumController.deleteAlbumById);
+
+router.get("/label/:id", labelController.getLabelById);
+router.get("/label/:id/update", labelController.updateLabelById);
+router.post("/label/:id/update", labelController.updateLabelByIdPost);
+// router.get("/label/:id/delete", labelController.deleteLabelById);
+
+router.get("/genre/:id", genreController.getGenreById);
+router.get("/genre/:id/update", genreController.updateGenreById);
+router.post("/genre/:id/update", genreController.updateGenreByIdPost);
+// router.get("/genre/:id/delete", genreController.deleteGenreById);
+
+router.get("/release/:id", releaseController.getReleaseById);
+router.get("/release/:id/update", releaseController.updateReleaseById);
+router.post("/release/:id/update", releaseController.updateReleaseByIdPost);
+// router.get("/release/:id/delete", releaseController.deleteReleaseById);
+
+
+
 module.exports = router;

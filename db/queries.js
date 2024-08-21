@@ -97,6 +97,18 @@ async function getAlbumsByLabelId(id){
   return rows;
 }
 
+
+async function getReleasesByLabelId(id){
+  const { rows } = await pool.query("SELECT releases.id, albums.albumname , releases.format,releases.album_id , releases.format, releases.price , releases.stock , releases.barcode , releases.imageurl FROM releases JOIN albums on releases.album_id = albums.id WHERE albums.label_id =($1)",[id]);
+  return rows;
+}
+
+async function getReleasesByGenreId(id){
+  const { rows } = await pool.query("SELECT releases.id, albums.albumname , releases.format,releases.album_id , releases.format, releases.price , releases.stock , releases.barcode , releases.imageurl FROM releases JOIN albums on releases.album_id = albums.id WHERE albums.genre_id =($1)",[id]);
+  return rows;
+}
+
+
 async function getLabelById(id){
   const {rows} = await pool.query("SELECT * FROM labels WHERE id = ($1)",[id]);
   return rows;
@@ -200,7 +212,50 @@ async function updateRelease(id , album , format , price , stock ,barcode , imag
 }
 
 
+async function deleteReleaseById(id){
+  await pool.query("DELETE FROM releases WHERE releases.id = ($1)",[id]);
+}
+
+async function deleteReleasesByAlbumId(album_id){
+  await pool.query("DELETE FROM releases WHERE album_id = ($1)",[album_id]);
+}
+
+async function deleteAlbumById(album_id){
+  await pool.query("DELETE FROM albums WHERE albums.id = ($1)",[album_id]);
+}
+
+async function deleteReleasesByAlbumIdList(placeholder, album_id_array){
+  await pool.query(`
+  DELETE from releases 
+  WHERE releases.album_id IN (${placeholder})`,
+   album_id_array);
+}
+
+async function deleteAlbumsByAlbumIdList(placeholder, album_id_array){
+  await pool.query(`
+  DELETE from albums 
+  WHERE albums.id IN (${placeholder})`,
+   album_id_array);
+}
+
+
+async function deleteArtistById(id){
+  await pool.query('DELETE FROM artists WHERE artists.id = ($1)',[id]);
+}
+
+async function deleteLabelById(id){
+  await pool.query('DELETE FROM labels WHERE labels.id = ($1)',[id]);
+}
+
+async function deleteGenreById(id){
+  await pool.query('DELETE FROM genres WHERE genres.id = ($1)',[id]);
+}
+
+
+
+
 module.exports = {
+  
   getAllArtists,
   insertArtist,
   getAllLabels,
@@ -217,6 +272,7 @@ module.exports = {
   getAlbumById,
   getReleasesByAlbumId,
   getAlbumsByLabelId,
+  getReleasesByLabelId,
   getLabelById,
   getAllAlbumsAndReleasesByLabelId,
   getGenreById,
@@ -227,6 +283,14 @@ module.exports = {
   updateAlbum,
   updateLabel,
   updateGenre,
-  updateRelease
+  updateRelease,
+  deleteReleaseById,
+  deleteReleasesByAlbumId,
+  deleteAlbumById,
+  deleteReleasesByAlbumIdList,
+  deleteAlbumsByAlbumIdList,
+  deleteArtistById,
+  deleteLabelById,
+  getReleasesByGenreId,
+  deleteGenreById
 };
-

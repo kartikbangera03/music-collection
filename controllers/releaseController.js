@@ -52,3 +52,9 @@ exports.updateReleaseByIdPost =  asyncHandler(async(req,res)=>{
     await db.updateRelease(req.params.id , album , format , price , stock ,barcode , imageUrl);
     res.redirect("/");
 })
+
+exports.deleteReleaseById = asyncHandler(async(req,res)=>{
+    await db.deleteReleaseById(req.params.id);
+    // res.send("DELETE RELEASE ID : "+req.params.id)
+    res.redirect("/category/releases");
+})

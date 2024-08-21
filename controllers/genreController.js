@@ -50,3 +50,33 @@ exports.updateGenreByIdPost =  asyncHandler(async(req,res)=>{
     await db.updateGenre(req.params.id , genreName);
     res.redirect("/");
 })
+
+exports.deleteGenreById = asyncHandler(async(req,res)=>{
+    const genre = await db.getGenreById(req.params.id);
+    const albums = await db.getAlbumsByGenreId(req.params.id);
+    const releases  = await db.getReleasesByGenreId(req.params.id);
+
+    res.render("deleteGenre",{
+        genre : genre,
+        allAlbums : albums,
+        allReleases : releases
+    });
+});
+
+
+exports.deleteGenreByIdPost =  asyncHandler(async(req,res)=>{
+    const albums = await db.getAlbumsByGenreId(req.params.id);
+    let albums_id_array = [];
+    albums.forEach((album)=>{
+        albums_id_array.push(album.id);
+    })
+
+    let placeholder = albums_id_array.map((_,i)=>`$${i+1}`).join(", ");
+    if(albums_id_array.length > 0){
+        await db.deleteReleasesByAlbumIdList(placeholder, albums_id_array)
+        await db.deleteAlbumsByAlbumIdList(placeholder, albums_id_array)
+    }
+    
+    await db.deleteGenreById(req.params.id)
+    res.redirect("/")
+});

@@ -62,5 +62,36 @@ exports.updateArtistByIdPost = asyncHandler(async(req,res)=>{
 
 
 exports.deleteArtistById = asyncHandler(async(req,res)=>{
-    res.send("DELETE ARTIST ")
+    const artist = await db.getArtistById(req.params.id);
+    const albums = await db.getAlbumsByArtistId(req.params.id);
+    const releases = await db.getReleasesByAlbumId(req.params.id);
+
+    res.render("deleteArtist",{
+        artist : artist,
+        allAlbums : albums,
+        allReleases : releases
+    });
+});
+
+
+exports.deleteArtistByIdPost =  asyncHandler(async(req,res)=>{
+    const albums = await db.getAlbumsByArtistId(req.params.id);
+    let albums_id_array = [];
+    albums.forEach((album)=>{
+        albums_id_array.push(album.id);
+    })
+
+    let placeholder = albums_id_array.map((_,i)=>`$${i+1}`).join(", ");
+    console.log("DELETE POST")
+    console.log(albums)
+    console.log(albums_id_array);
+    console.log(placeholder);
+    console.log(typeof placeholder);
+    if(albums_id_array.length > 0){
+        await db.deleteReleasesByAlbumIdList(placeholder, albums_id_array)
+        await db.deleteAlbumsByAlbumIdList(placeholder, albums_id_array)
+    }
+    
+    await db.deleteArtistById(req.params.id)
+    res.redirect("/category/artists");
 });

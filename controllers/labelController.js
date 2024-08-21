@@ -49,3 +49,39 @@ exports.updateLabelByIdPost =  asyncHandler(async(req,res)=>{
     await db.updateLabel(req.params.id,labelName , yearFounded);
     res.redirect("/");
 })
+
+
+
+exports.deleteLabelById = asyncHandler(async(req,res)=>{
+    const label = await db.getLabelById(req.params.id);
+    const albums = await db.getAlbumsByLabelId(req.params.id);
+    const releases = await db.getReleasesByLabelId(req.params.id);
+
+    res.render("deleteLabel",{
+        label : label,
+        allAlbums : albums,
+        allReleases : releases
+    });
+});
+
+exports.deleteLabelByIdPost =  asyncHandler(async(req,res)=>{
+    const albums = await db.getAlbumsByLabelId(req.params.id);
+    let albums_id_array = [];
+    albums.forEach((album)=>{
+        albums_id_array.push(album.id);
+    })
+
+    let placeholder = albums_id_array.map((_,i)=>`$${i+1}`).join(", ");
+    console.log("DELETE POST")
+    console.log(albums)
+    console.log(albums_id_array);
+    console.log(placeholder);
+    console.log(typeof placeholder);
+    if(albums_id_array.length > 0){
+        await db.deleteReleasesByAlbumIdList(placeholder, albums_id_array)
+        await db.deleteAlbumsByAlbumIdList(placeholder, albums_id_array)
+    }
+    
+    await db.deleteLabelById(req.params.id)
+    res.redirect("/category/artists");
+});

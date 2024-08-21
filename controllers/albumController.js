@@ -62,6 +62,19 @@ exports.updateAlbumByIdPost = asyncHandler(async(req,res)=>{
 });
 
 
-exports.deleteArtistById = asyncHandler(async(req,res)=>{
-    res.send("DELETE ALBUM")
+exports.deleteAlbumById = asyncHandler(async(req,res)=>{
+    const releases = await db.getReleasesByAlbumId(req.params.id);
+    console.log(typeof releases);
+    console.log(releases)
+    res.render("deleteAlbums",{
+        allReleases : releases,
+    })
 }); 
+
+exports.deleteAlbumByIdPost = asyncHandler(async(req,res)=>{
+    
+
+    await db.deleteReleasesByAlbumId(req.params.id);
+    await db.deleteAlbumById(req.params.id);
+    res.redirect("/category/albums")
+})

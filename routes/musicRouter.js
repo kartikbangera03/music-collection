@@ -34,27 +34,30 @@ router.get("/artist/:id", artistController.getArtistById);
 router.get("/artist/:id/update", artistController.updateArtistById);
 router.post("/artist/:id/update", artistController.updateArtistByIdPost);
 router.get("/artist/:id/delete", artistController.deleteArtistById);
-
+router.post("/artist/:id/delete", artistController.deleteArtistByIdPost);
 
 router.get("/album/:id", albumController.getAlbumById);
 router.get("/album/:id/update", albumController.updateAlbumById);
 router.post("/album/:id/update", albumController.updateAlbumByIdPost);
-// router.get("/album/:id/delete", albumController.deleteAlbumById);
+router.get("/album/:id/delete", albumController.deleteAlbumById);
+router.post("/album/:id/delete", albumController.deleteAlbumByIdPost);
 
 router.get("/label/:id", labelController.getLabelById);
 router.get("/label/:id/update", labelController.updateLabelById);
 router.post("/label/:id/update", labelController.updateLabelByIdPost);
-// router.get("/label/:id/delete", labelController.deleteLabelById);
+router.get("/label/:id/delete", labelController.deleteLabelById);
+router.post("/label/:id/delete", labelController.deleteLabelByIdPost);
 
 router.get("/genre/:id", genreController.getGenreById);
 router.get("/genre/:id/update", genreController.updateGenreById);
 router.post("/genre/:id/update", genreController.updateGenreByIdPost);
-// router.get("/genre/:id/delete", genreController.deleteGenreById);
+router.get("/genre/:id/delete", genreController.deleteGenreById);
+router.post("/genre/:id/delete", genreController.deleteGenreByIdPost);
 
 router.get("/release/:id", releaseController.getReleaseById);
 router.get("/release/:id/update", releaseController.updateReleaseById);
 router.post("/release/:id/update", releaseController.updateReleaseByIdPost);
-// router.get("/release/:id/delete", releaseController.deleteReleaseById);
+router.get("/release/:id/delete", releaseController.deleteReleaseById);
 
 
 

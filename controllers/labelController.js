@@ -3,7 +3,7 @@ const asyncHandler = require("express-async-handler");
 const db = require("../db/queries");
 
 exports.labelCreateGet = asyncHandler (async(req,res)=>{
-    res.render("labelCreateForm");
+    res.render("labelCreateForm" , {title:"CREATE NEW LABEL"});
 });
 
 exports.labelCreatePost = asyncHandler (async(req,res)=>{
@@ -23,7 +23,7 @@ exports.getLabelById = asyncHandler(async(req,res)=>{
     const label = await db.getLabelById(req.params.id);
     const albums  = await db.getAlbumsByLabelId(req.params.id);
     const releases  = await db.getAllAlbumsAndReleasesByLabelId(req.params.id);
-    console.log("LAbel DETAILS")
+    console.log("********LABEL DETAILS******")
     console.log(label)
     console.log("ALBUMS")
     console.log(albums)
@@ -39,8 +39,9 @@ exports.getLabelById = asyncHandler(async(req,res)=>{
 
 exports.updateLabelById =  asyncHandler(async(req,res)=>{
     const label = await db.getLabelById(req.params.id);
+    title = "UPDATE LABEL";
     console.log(label);
-    res.render("labelCreateForm", {label})
+    res.render("labelCreateForm", {label,title})
 });
 
 

@@ -6,6 +6,7 @@ const albumController = require("../controllers/albumController");
 const labelController = require("../controllers/labelController");
 const genreController = require("../controllers/genreController");
 const releaseController = require("../controllers/releaseController");
+const dashBoardControlller = require("../controllers/dashBoardController"); 
 
 router.get("/", homepageController.homepageDashboard )
 router.get("/artist/create" , artistController.artistCreateGet);
@@ -58,6 +59,9 @@ router.get("/release/:id", releaseController.getReleaseById);
 router.get("/release/:id/update", releaseController.updateReleaseById);
 router.post("/release/:id/update", releaseController.updateReleaseByIdPost);
 router.get("/release/:id/delete", releaseController.deleteReleaseById);
+
+router.get("/lowStockReleases" , dashBoardControlller.displayLowStockReleases);
+router.get("/dashboard" , dashBoardControlller.getDashBoard)
 
 
 

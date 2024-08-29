@@ -1,11 +1,40 @@
 <html>
     <head>
-        <title>ALL ARTISTS</title>
+        <title>Homepage</title>
+        <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+
     </head>
-    <body>
-        <br><br>
-        <% for(let i=0;i<allArtists.length ; i++) { %>
-            <a href="/artist/<%=allArtists[i].id%>"><%=allArtists[i].firstname%></a><br><br>
-        <%}%>
+    <body>   
+        
+        <%- include('./sideBar'); %>
+        <div class="rightContainer">
+            <%- include('./header'); %>
+            <div class="infoContainer">
+                <h3>ALL ARTIST</h3>    
+                <div class="mainContainer">
+
+                
+                    <% for(let i=0;i<allArtists.length ; i++) { %>
+                        <div class="eachItem eachArtist">
+                            <div class="itemImage">
+                                <a href="/artist/<%=allArtists[i].id%>"><img src="<%=allArtists[i].imageurl%>" alt="artistImage"></a>
+                            </div>
+                            <div class="itemName">
+                                <div class="artistName">
+                                    <a class="infoLink" href="/artist/<%=allArtists[i].id%>"><%=allArtists[i].firstname%></a>
+                                </div>
+                            </div>
+    
+                        </div>
+    
+                        <!-- <a href="/artist/<%=allArtists[i].id%>"><%=allArtists[i].firstname%></a><br><br> -->
+                    <%}%>
+                </div>
+            
+            </div>
+                
+            
+        </div>
+
     </body>
 </html>

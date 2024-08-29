@@ -1,0 +1,295 @@
+:root{
+    --accent-color : #121d3f;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.sideBar{
+    box-sizing: border-box;    
+    border: 1px solid grey;
+    width: 250px;
+    height: 100%;
+    position:fixed;
+    padding: 0 20px;
+    text-align: right;
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.rightContainer{
+    width: 100%;
+    margin-left: 250px;
+    background-color: #ececec;
+   
+    
+}
+
+.header{
+    box-sizing: border-box; 
+    padding: 0px 20px;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid grey;
+    box-shadow: 0px 5px 5px lightgray; 
+    background-color: white;
+}
+
+.mainContainer {
+    box-sizing: border-box;
+    padding:30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    background-color: #ececec;
+    row-gap: 20px;
+}
+
+.eachItem{
+    width: 170px;
+    height: max-content;
+    box-shadow: 0 0 1px 1px lightgray;
+    background-color: white;
+    overflow: hidden;
+    padding-bottom: 10px;
+}
+
+.eachArtist{
+    height: 190px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.eachAlbum{
+    height: 280px;
+    display: flex;
+    flex-direction: column;.sideBar{
+        box-sizing: border-box;    
+        border: 1px solid grey;
+        width: 250px;
+        height: 100%;
+        position:fixed;
+        padding: 0 20px;
+        text-align: right;
+    }
+    justify-content: space-between;
+    padding-bottom: 0;
+}
+
+.artistName{
+    font-weight: bold;
+}
+
+.itemImage{
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+
+.itemImage img{
+    width: 160px;
+    height: 160px;
+    padding-top: 5px;
+    object-fit: cover;
+    border: none;
+}
+
+.itemName{.sideBar{
+    box-sizing: border-box;    
+    border: 1px solid grey;
+    width: 250px;
+    height: 100%;
+    position:fixed;
+    padding: 0 20px;
+    text-align: right;
+}
+    display: flex;
+    justify-content: center;       
+}
+
+.releaseDetails{
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+}
+
+.albumName{
+    text-align: center;
+}
+
+.priceAndStock{
+    display: flex;
+    justify-content: space-between;
+}
+
+.stock{
+    color: red;
+}
+
+
+.infoContainer{
+    padding: 30px;
+    background-color: #ececec;
+}
+
+
+.artistDetails{
+    display: flex;
+    gap: 20px;
+}
+
+.artistImage{
+    width: 220px;
+    height: 220px;
+}
+
+.artistImage img{
+    width: inherit;
+    height: inherit;
+    object-fit: cover;
+    padding: 5px;
+}
+
+.artistInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.artistOtherInfo{
+    font-weight: bold;
+}
+
+.artistUpdateDelete{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+a{
+    color:white;
+    text-decoration: none;
+}
+
+.itemMinorInfo ,.itemHeading{
+    font-size: 1rem;
+    color: black;
+}
+
+
+.itemHeading{
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inherit;
+
+}
+
+.albumCardDetails{
+    padding-left: 5%;
+}
+
+form{
+    border: 1px solid lightgray;
+    width: max-content;
+    padding: 30px;
+    border-radius: 5px;
+    background-color: white;
+    font-size:medium;
+}
+
+input , select{
+    background-color: lightgray;
+    border: none;
+    font-size: medium;
+    border-radius: 5px;
+    padding: 5px 10px;
+    width: 100%;
+}
+
+.releasename{
+    display: flex;
+}
+
+.searchBarForm{
+    border: none;
+    /* height: 100%; */
+    width: 330px;
+    padding: 0px;
+    border-radius: 5px;
+    background-color: white;
+    font-size:1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    /* background-color: aqua */
+    margin-top: 10px;
+}
+
+.searchBarInput{
+    background-color: lightgray;
+    border: none;
+    font-size: medium;
+    border-radius: 5px;
+    padding: 5px 10px;
+    width: 100%;
+}
+
+.cardContainer{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.countCard{
+    width: 300px;
+    height: 150px;
+    border: 1px solid gainsboro;
+    border-radius: 10px;
+    text-align: center;
+    /* padding: 30px; */
+    padding-top: 60px;
+    color: white;
+    font-weight: bold;
+    font-size: large;
+    /* vertical-align: middle; */
+}
+
+.albumsCountCard{
+    background-color:rgb(71, 171, 218) ;
+}
+
+.releasesCountCard{
+    background-color:rgb(106, 192, 84) ;
+}
+
+.lowReleaseCountCard{
+    background-color:rgb(216, 91, 74);
+}
+
+button{
+    color: white;
+    background-color: var(--accent-color);
+    border-radius: 5px;
+    border: none;
+    height: 25px;
+    padding: 0 10px;
+}
+
+.infoLink{
+    color: black;
+}

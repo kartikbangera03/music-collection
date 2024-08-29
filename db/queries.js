@@ -55,11 +55,8 @@ async function insertGenre(genreName) {
 }
 
 async function getAllAlbums(){
-  const { rows } = await pool.query("SELECT * FROM albums");
-  return rows;async function updateArtist( id,firstName , lastName ,  birthDate , deathDate, country , imageUrl) {
-    await pool.query("INSERT INTO artists (firstName , lastName , birthDate , deathDate , country , imageURL) VALUES ($1,$2,$3,$4,$5,$6)",
-     [firstName , lastName ,  birthDate , deathDate, country , imageUrl]);
-  }
+  const { rows } = await pool.query("SELECT albums.id , albums.albumname, albums.artist_id, albums.imageurl, albums.releasedate , artists.firstname , artists.lastname FROM albums JOIN artists ON albums.artist_id = artists.id");
+  return rows;
 }
 
 async function insertAlbum(albumName , artist , label , genre , releaseDate , imageUrl){
@@ -68,12 +65,26 @@ async function insertAlbum(albumName , artist , label , genre , releaseDate , im
 }
 
 async function getAllReleases(){
-  const { rows } = await pool.query("SELECT releases.id, albums.albumname , releases.format,releases.album_id FROM releases JOIN albums on releases.album_id = albums.id");
+  const { rows } = await pool.query("SELECT albums.artist_id ,releases.id, albums.albumname , artists.firstname , artists.lastname,  releases.format,releases.album_id , releases.imageurl , releases.price , releases.stock FROM releases JOIN albums on releases.album_id = albums.id JOIN artists on albums.artist_id = artists.id");
   return rows;
 }
 
 async function getReleaseById(id){
-  const { rows } = await pool.query("SELECT releases.id, albums.albumname , releases.format,releases.album_id , releases.format, releases.price , releases.stock , releases.barcode , releases.imageurl FROM releases JOIN albums on releases.album_id = albums.id WHERE releases.id = ($1)",[id]);
+  // const { rows } = await pool.query("SELECT releases.id, albums.albumname , releases.format,releases.album_id , releases.format, releases.price , releases.stock , releases.barcode , releases.imageurl FROM releases JOIN albums on releases.album_id = albums.id WHERE releases.id = ($1)",[id]);
+  
+  const {rows} = await pool.query(`
+  SELECT 
+  releases.id, releases.format,releases.album_id , releases.format, releases.price , releases.stock , releases.barcode , releases.imageurl ,
+  albums.albumname, albums.artist_id, albums.imageurl, albums.releasedate ,
+  artists.firstname , artists.lastname ,
+  labels.labelname , albums.label_id , genres.genrename , albums.genre_id
+  FROM releases 
+  JOIN albums ON releases.album_id = albums.id
+  JOIN artists ON albums.artist_id = artists.id
+  JOIN labels ON albums.label_id = labels.id
+  JOIN genres ON albums.genre_id = genres.id
+  WHERE releases.id = ($1)
+  `,[id])
   return rows;
 }
 
@@ -81,19 +92,19 @@ async function insertRelease(album , format , price , stock ,barcode , imageUrl)
   await pool.query("INSERT INTO releases(album_id , format , price , stock ,barcode  , imageURL) VALUES ($1,$2,$3,$4,$5,$6)",
   [album , format , price , stock ,barcode  , imageUrl]);
 }
-
+// "SELECT albums.id , albums.albumname, albums.artist_id, albums.imageurl, albums.releasedate , artists.firstname , artists.lastname FROM albums JOIN artists ON albums.artist_id = artists.id"
 async function getAlbumById(id){
-  const { rows } = await pool.query("SELECT * FROM albums WHERE albums.id = ($1)",[id]);
+  const { rows } = await pool.query("SELECT albums.id , albums.albumname, albums.artist_id, albums.imageurl, albums.releasedate , artists.firstname , artists.lastname , labels.labelname , albums.label_id , genres.genrename , albums.genre_id FROM albums JOIN artists ON albums.artist_id = artists.id JOIN labels ON albums.label_id = labels.id JOIN genres ON albums.genre_id = genres.id WHERE albums.id = ($1)",[id]);
   return rows;
 }
 
 async function getReleasesByAlbumId(id){
-  const { rows } = await pool.query("SELECT * FROM releases WHERE releases.album_id = ($1)",[id]);
+  const { rows } = await pool.query("SELECT releases.id , releases.imageurl , releases.price, releases.format , releases.stock , albums.artist_id , artists.firstname , artists.lastname ,albums.albumname FROM releases JOIN albums ON releases.album_id = albums.id JOIN artists ON albums.artist_id =  artists.id  WHERE releases.album_id = ($1)",[id]);
   return rows;
 }
 
 async function getAlbumsByLabelId(id){
-  const { rows } = await pool.query("SELECT * FROM albums WHERE albums.label_id = ($1)",[id]);
+  const { rows } = await pool.query("SELECT albums.id , albums.albumname, albums.artist_id, albums.imageurl, albums.releasedate , artists.firstname , artists.lastname FROM albums JOIN artists ON albums.artist_id =  artists.id WHERE albums.label_id = ($1)",[id]);
   return rows;
 }
 
@@ -252,6 +263,35 @@ async function deleteGenreById(id){
 }
 
 
+async function getAlbumCount(){
+  const {rows} = await pool.query("SELECT count(*) FROM albums ");
+  return rows[0].count;
+}
+
+async function getReleasesCount(){
+  const {rows} = await pool.query("SELECT count(*) FROM releases ");
+  return rows[0].count;
+}
+
+async function getReleasesCountByLowStock(){
+  const {rows} = await pool.query("SELECT count(*) FROM releases WHERE releases.stock <=5 ");
+  return rows[0].count;
+}
+
+async function getReleasesCountByLowStock(){
+  const {rows} = await pool.query("SELECT count(*) FROM releases WHERE releases.stock <=5 ");
+  return rows[0].count;
+}
+
+async function getLatestReleases(){
+  const { rows } = await pool.query("SELECT releases.id,  albums.artist_id  ,albums.albumname , artists.firstname , artists.lastname,  releases.format,releases.album_id , releases.imageurl , releases.price , releases.stock FROM releases JOIN albums on releases.album_id = albums.id JOIN artists on albums.artist_id = artists.id ORDER BY releases.id DESC LIMIT 8");
+  return rows;
+}
+
+async function getLowStockReleases(){
+  const {rows} = await pool.query("SELECT albums.artist_id ,releases.id, albums.albumname , artists.firstname , artists.lastname,  releases.format,releases.album_id , releases.imageurl , releases.price , releases.stock FROM releases JOIN albums on releases.album_id = albums.id JOIN artists on albums.artist_id = artists.id WHERE releases.stock <=5 ");
+  return rows;
+}
 
 
 module.exports = {
@@ -292,5 +332,10 @@ module.exports = {
   deleteArtistById,
   deleteLabelById,
   getReleasesByGenreId,
-  deleteGenreById
+  deleteGenreById ,
+  getAlbumCount,
+  getReleasesCount,
+  getReleasesCountByLowStock,
+  getLatestReleases,
+  getLowStockReleases
 };

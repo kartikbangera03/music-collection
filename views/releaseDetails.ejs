@@ -1,12 +1,66 @@
 <html>
-    <title>
-        Release Details
-    </title>
-    <body>
-        <a href="/album/<%=release[0].album_id%>"><%=release[0].albumname%></a>
-        <p>Format : <%=release[0].format%></p>
-        <a href="/release/<%=release[0].id%>/update">Edit</a><br><br>
-        <a href="/release/<%=release[0].id%>/delete">Delete</a><br><br>
+    <head>
+        <title>Homepage</title>
+        <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+        <script>
+    
+        
+            function toggleDeleteForm(){
+                let element  = document.getElementById("deleteForm");
+                if(element.style.display === "none"){
+                    element.style.display = "block";
+                }else{
+                    element.style.display = "none";
+                }
+       
+    
+        }
+        </script>
+        </head>
+    <body>   
+        
+        <%- include('./sideBar'); %>
+        <div class="rightContainer">
+            <%- include('./header'); %>
+            <div class="infoContainer">
+                <div class="artistDetails">
+                    <div class="artistImage">
+                        <img src="<%=release[0].imageurl%>" alt="">
+                    </div>
+                    <div class="artistInfo">
+                        <div class="artistUpdateDelete">
+
+                            <div class="releasename">
+                                <a href="/artist/<%=release[0].artist_id%>"><h2><%=release[0].firstname + " " + release[0].lastname %></h2></a>
+                                <h2> - </h2>
+                                <a href="/album/<%=release[0].album_id%>"><h2><%=release[0].albumname%></h2></a>
+                            </div>
+                            <a href="/release/<%=release[0].id%>/update">
+                                <div class="editButton">
+                                     Edit   
+                                </div>
+                            </a>
+                            <a href="/release/<%=release[0].id%>/delete">
+                                <div class="deleteButton">
+                                    Delete
+                                </div>
+                            </a>
+                        </div>
+                        <div class="artistOtherInfo">
+                            <span><h4>Label : <a href="/label/<%=release[0].label_id%>"><%=release[0].labelname%></a></h4></span>
+                            <% const d =  new Date(release[0].releasedate).getFullYear()%>
+                            <span><h4>Release : <%= d %></h4></span>
+                            <span><h4>Genre : <a href="/label/<%=release[0].genre_id%>"><%=release[0].genrename%></a></h4></span>
+                            <span><h4>Barcode : <%= release[0].barcode %></h4></span>
+                            <span><h4>Price : $<%= release[0].price %></h4></span>
+                            <div class="stock">
+                                <h4>$<%= release[0].stock %> In Stock</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </body>
-   
 </html>

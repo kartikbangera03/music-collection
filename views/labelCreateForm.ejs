@@ -1,19 +1,29 @@
 <html>
     <head>
-        <title>Artist Create</title>
+        <title>Homepage</title>
+        <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+
     </head>
-    <body>
-        <form method="POST">
-            <label for="labelName">Label Name :
-                <br><input type="text" name="labelName" id="labelName" required  value= <%=typeof label === "undefined" ? "" : label[0].labelname  %> >
-            </label>
-            <br><br>
-            <label for="yearFounded">Year Founded :
-                <br><input type="number" name="yearFounded" id="yearFounded" required value= <%=typeof label === "undefined" ? "" : label[0].yearfounded  %> >
-            </label>
-            <br><br>
-            <button type="submit"><%=typeof label === "undefined" ? "Create Label" : "Update Label"  %></button>
-        </form>
+    <body>   
+        
+        <%- include('./sideBar'); %>
+        <div class="rightContainer">
+            <%- include('./header'); %>
+            <div class="infoContainer">
+                <h2><%= title%></h2>
+                <form method="POST">
+                    <label for="labelName">Label Name :
+                        <br><input type="text" name="labelName" id="labelName" required  value= <%=typeof label === "undefined" ? "" : label[0].labelname  %> >
+                    </label>
+                    <br><br>
+                    <label for="yearFounded">Year Founded :
+                        <br><input type="number" name="yearFounded" id="yearFounded" required value= <%=typeof label === "undefined" ? "" : label[0].yearfounded  %> >
+                    </label>
+                    <br><br>
+                    <button type="submit"><%=typeof label === "undefined" ? "Create Label" : "Update Label"  %></button>
+                </form>
+            </div>
+        </div>
+
     </body>
 </html>
-

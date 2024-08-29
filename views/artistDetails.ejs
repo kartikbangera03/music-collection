@@ -1,11 +1,50 @@
+
 <html>
-    <title>
-        Artist Details
-    </title>
-    <body>
-        <span><%= artist[0].firstname %></span>
-        <a href="/artist/<%=artist[0].id%>/update">Edit</a><br><br>
-        <a href="/artist/<%=artist[0].id%>/delete">Delete</a><br><br>
+    <head>
+        <title>Homepage</title>
+        <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+
+    </head>
+    <body>   
+        
+        <%- include('./sideBar'); %>
+        <div class="rightContainer">
+            <%- include('./header'); %>
+            <div class="infoContainer">
+
+
+                 <div class="artistDetails">
+                    <div class="artistImage">
+                        <img src="<%=artist[0].imageurl%>" alt="">
+                    </div>
+                    <div class="artistInfo">
+                        <div class="artistUpdateDelete">
+                            <span><h1><%= artist[0].firstname %></h1></span>
+                            <a  class="infoLink" href="/artist/<%=artist[0].id%>/update">
+                                <div class="editButton">
+                                     Edit   
+                                </div>
+                            </a>
+                            <a class="infoLink" href="/artist/<%=artist[0].id%>/delete">
+                                <div class="deleteButton">
+                                    Delete
+                                </div>
+                            </a>
+                        </div>
+                        <div class="artistOtherInfo">
+                            <% const d = new Date(artist[0].birthdate).toDateString() %>
+
+                            <p>Born : <%=d %></p>
+                            <p>Country : <%=artist[0].country%> </p>
+                        </div>
+                    </div>
+                </div>
+                <%- include("showAlbumsWithYear" ,{allAlbums : allAlbums}) %>
+                <%- include("showReleases" ,{allReleases : allReleases }) %>
+            </div>
+
+            
+        </div>
+
     </body>
-    <%- include("albumsAndReleases" ,{allAlbums : allAlbums,allReleases : allReleases }) %>
 </html>

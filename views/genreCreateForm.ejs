@@ -1,14 +1,25 @@
 <html>
     <head>
-        <title>Genre Create</title>
+        <title>Homepage</title>
+        <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+
     </head>
-    <body>
-        <form method="POST">
-            <label for="genreName">Label Name :
-                <br><input type="text" name="genreName" id="genreName" required value= <%= typeof genre === "undefined" ? "" : genre[0].genrename %> >
-            </label>
-            <br><br>
-            <button type="submit">Create Genre</button>
-        </form>
+    <body>   
+        
+        <%- include('./sideBar'); %>
+        <div class="rightContainer">
+            <%- include('./header'); %>
+            <div class="infoContainer">
+                <h2>CREATE GENRE</h2>
+                <form method="POST">
+                    <label for="genreName">Label Name :
+                        <br><input type="text" name="genreName" id="genreName" required value= <%= typeof genre === "undefined" ? "" : genre[0].genrename %> >
+                    </label>
+                    <br><br>
+                    <button type="submit">Create Genre</button>
+                </form>
+            </div>
+        </div>
+
     </body>
 </html>

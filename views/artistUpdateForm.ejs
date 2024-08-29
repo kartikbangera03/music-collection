@@ -1,36 +1,49 @@
+
 <html>
     <head>
-        <title>Artist Create</title>
-    </head>
-    <body>
-        <h2>Update Artist Details </h2>
-        <form action="/artist/<%=artist[0].id%>/update" method="POST">
-            <label for="firstName">First Name :
-                <br><input type="text" name="firstName" id="firstName" value=<%=artist[0].firstname%> required>
-            </label>
-            <br><br>
-            <label for="lastName">Last Name :
-                <br><input type="text" name="lastName" id="lastName" value=<%=artist[0].lastname%> required>
-            </label>
-            <br><br>
-        
-            <label for="birthDate">Date of Birth :
-                <br><input type="date" name="birthDate" id="birthDate" value=<%= artistBirthDate %>  required >
-            </label>
-            <br><br>
-            <label for="deathDate">Date of Death :
-                <br><input type="date" name="deathDate" id="deathDate" value=<%=artistDeathDate%> >
-            </label>
-            <br><br>
-            <label for="country">Country :
-                <br> <input type="text" name="country" id="country" value=<%=artist[0].country%> required>
-            </label>
-            <br><br>
-            <label for="imageUrl">Image Url :
-                <br> <input type="url" name="imageUrl" id="imageUrl" placeholder="https://example.com"  pattern="https://.*" value=<%=artist[0].imageurl%>  >
-            </label>
+        <title>Homepage</title>
+        <link rel="stylesheet" type="text/css" href="/css/styles.css" />
 
-            <br><br> <br><button type="submit">Submit</button>
-        </form>
+    </head>
+    <body>   
+        
+        <%- include('./sideBar'); %>
+        <div class="rightContainer">
+            <%- include('./header'); %>
+            <div class="infoContainer">
+
+
+                <h2>Update Artist Details </h2>
+                <form action="/artist/<%=artist[0].id%>/update" method="POST">
+                    <label for="firstName">First Name :
+                        <input type="text" name="firstName" id="firstName" value=<%=artist[0].firstname%> required>
+                    </label>
+                    <br><br>
+                    <label for="lastName">Last Name :
+                        <input type="text" name="lastName" id="lastName" value=<%=artist[0].lastname%> >
+                    </label>
+                    <br><br>
+                
+                    <label for="birthDate">Date of Birth :
+                        <input type="date" name="birthDate" id="birthDate" value=<%= artistBirthDate %>  required >
+                    </label>
+                    <br><br>
+                    <label for="deathDate">Date of Death :
+                        <input type="date" name="deathDate" id="deathDate" value=<%=artistDeathDate%> >
+                    </label>
+                    <br><br>
+                    <label for="country">Country :
+                        <input type="text" name="country" id="country" value=<%=artist[0].country%> required>
+                    </label>
+                    <br><br>
+                    <label for="imageUrl">Image Url :
+                        <input type="url" name="imageUrl" id="imageUrl" placeholder="https://example.com"  pattern="https://.*" value=<%=artist[0].imageurl%>  >
+                    </label>
+        
+                    <br><br> <br><button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+
     </body>
 </html>

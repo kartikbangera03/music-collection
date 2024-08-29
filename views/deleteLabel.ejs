@@ -1,20 +1,29 @@
 <html>
-    <script>
+    <head>
+        <title>Homepage</title>
+        <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+        <script>
     
         
-        function toggleDeleteForm(){
-            let element  = document.getElementById("deleteForm");
-            if(element.style.display === "none"){
-                element.style.display = "block";
-            }else{
-                element.style.display = "none";
-            }
-    //   console.log(element)
-
-    }
-    </script>
-    <body>
-        <span><%= label[0].labelname %></span>
+            function toggleDeleteForm(){
+                let element  = document.getElementById("deleteForm");
+                if(element.style.display === "none"){
+                    element.style.display = "block";
+                }else{
+                    element.style.display = "none";
+                }
+        //   console.log(element)
+    
+        }
+        </script>
+    </head>
+    <body>   
+        
+        <%- include('./sideBar'); %>
+        <div class="rightContainer">
+            <%- include('./header'); %>
+            <div class="infoContainer">
+                <span><%= label[0].labelname %></span>
         
         
         
@@ -39,5 +48,8 @@
             <br><br>
         <%}%> -->
         <%- include("albumsAndReleases" ,{allAlbums : allAlbums,allReleases : allReleases }) %>
+            </div>
+        </div>
+
     </body>
 </html>

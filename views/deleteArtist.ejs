@@ -1,43 +1,52 @@
 <html>
-    <script>
+    <head>
+        <title>Homepage</title>
+        <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+        <script>
     
         
-        function toggleDeleteForm(){
-            let element  = document.getElementById("deleteForm");
-            if(element.style.display === "none"){
-                element.style.display = "block";
-            }else{
-                element.style.display = "none";
-            }
-    //   console.log(element)
-
-    }
-    </script>
-    <body>
-        <span><%= artist[0].firstname %></span>
+            function toggleDeleteForm(){
+                let element  = document.getElementById("deleteForm");
+                if(element.style.display === "none"){
+                    element.style.display = "block";
+                }else{
+                    element.style.display = "none";
+                }
+        //   console.log(element)
+    
+        }
+        </script>
+    </head>
+    <body>   
+        
+        <%- include('./sideBar'); %>
+        <div class="rightContainer">
+            <%- include('./header'); %>
+            
+            <div class="infoContainer">
+                <span><%= artist[0].firstname %></span>
         
         
         
-        <button data-target="" onclick= "toggleDeleteForm()" >
-            DELETE
-        </button> 
-        
-        
-        <div id="deleteForm"  style = "display: none;">
-            <p>Deleting the album will delete all its releases</p>
-            <p>DO YOU STILL WANT TO DELETE THE ALBUM  </p>
-            <button onclick="toggleDeleteForm()">CANCEL</button>
-            <form method="POST">
+                <button data-target="" onclick= "toggleDeleteForm()" >
+                    DELETE
+                </button> 
                 
-                <button type = "submit">DELETE</button>
-            </form>
+                
+                <div id="deleteForm"  style = "display: none;">
+                    <p>Deleting the album will delete all its releases</p>
+                    <p>DO YOU STILL WANT TO DELETE THE ALBUM  </p>
+                    <button onclick="toggleDeleteForm()">CANCEL</button>
+                    <form method="POST">
+                        
+                        <button type = "submit">DELETE</button>
+                    </form>
+                </div>
+            
+                <%- include("showAlbumsWithYear" ,{allAlbums : allAlbums}) %>
+                <%- include("showReleases" ,{allReleases : allReleases }) %>
+            </div>
         </div>
-        <!-- <h2>Releases</h2>
-        <% for(let i=0;i<allReleases.length ; i++) { %>
-            <a href="/release/<%=allReleases[i].id%>"><%=allReleases[i].albumname%></a>
-            <p>Format : <%=allReleases[i].format%></p>
-            <br><br>
-        <%}%> -->
-        <%- include("albumsAndReleases" ,{allAlbums : allAlbums,allReleases : allReleases }) %>
+
     </body>
 </html>

@@ -1,10 +1,41 @@
 <h2>Albums</h2>
-<% for(let i=0;i<allAlbums.length ; i++) { %>
+<!-- <%for(let i=0;i<allAlbums.length ; i++) { %>
     <a href="/artist/<%=allAlbums[i].id%>"><%=allAlbums[i].albumname%></a><br><br>
-<%}%>
+<%}%> -->
+<div class="mainContainer">
+    <% for(let i=0;i<allAlbums.length ; i++) { %>
+        <div class="eachItem">
+            <div class="itemImage">
+                <a href="/album/<%=allAlbums[i].id%>"><img src="<%=allAlbums[i].imageurl%>" alt="albumImage"></a>
+            </div>
+            <div class="itemName">
+                <a href="/album/<%=allAlbums[i].id%>"><h4><%=allAlbums[i].albumname%></h4></a>
+            </div>
+
+        </div>
+    <%}%>
+</div>
 <h2>Releases</h2>
-<% for(let i=0;i<allReleases.length ; i++) { %>
-    <a href="/artist/<%=allReleases[i].id%>"><%=allReleases[i].albumname%></a>
-    <p>Format : <%=allReleases[i].format%></p>
-    <br><br>
-<%}%>
+<div class="mainContainer">
+    <% for(let i=0;i<allReleases.length ; i++) { %>
+        <!-- <a href="/artist/<%=allReleases[i].id%>"><%=allReleases[i].albumname%></a>
+        <p>Format : <%=allReleases[i].format%></p>
+        <br><br> -->
+    
+        <div class="eachReleaseItem">
+            <div class="itemImage">
+                <a href="/release/<%=allReleases[i].id%>"><img src="<%=allReleases[i].imageurl%>" alt="albumImage"></a>
+            </div>
+            <div class="releaseDetails">
+                <a class="albumName" href="/release/<%=allReleases[i].id%>"><h4><%=allReleases[i].albumname%></h4></a>
+                <a href="/release/<%=allReleases[i].id%>"><p><%=allReleases[i].firstname%></p></a>
+                <p><%=allReleases[i].format%></p>
+                <div class="priceAndStock">
+                    <div class="price">$<%=allReleases[i].price%></div>
+                    <div class="stock"><%=allReleases[i].stock%> available</div>
+                </div>
+            </div>
+    
+        </div>
+    <%}%>
+</div>

@@ -9,7 +9,8 @@ exports.albumCreateGet = asyncHandler (async(req,res)=>{
     res.render("albumCreateForm", {
         allArtists : artists,
         allLabels : labels ,
-        allGenres : genres
+        allGenres : genres,
+        title:"CREATE NEW ALBUM"
     });
 });
 
@@ -22,6 +23,7 @@ exports.albumCreatePost = asyncHandler (async(req,res)=>{
 
 exports.displayAlbums = asyncHandler(async(req,res)=>{
     const albums = await db.getAllAlbums();
+    console.log(albums);
     res.render("displayAllAlbums",{
         allAlbums : albums
     })
@@ -31,6 +33,10 @@ exports.displayAlbums = asyncHandler(async(req,res)=>{
 exports.getAlbumById = asyncHandler(async(req,res)=>{
     const album = await db.getAlbumById(req.params.id);
     const releases = await db.getReleasesByAlbumId(req.params.id)
+    console.log("EACH ALBUM");
+    console.log(album);
+    console.log("RELEASES OF ALBUM")
+    console.log(releases);
     res.render("albumDetails" , {
         album :album ,
         allReleases : releases
@@ -58,16 +64,18 @@ exports.updateAlbumById = asyncHandler(async(req,res)=>{
 exports.updateAlbumByIdPost = asyncHandler(async(req,res)=>{
     const {albumName , artist , label , genre , releaseDate , imageUrl } = req.body;
     await db.updateAlbum(req.params.id , albumName , artist , label , genre , releaseDate , imageUrl);
-    res.redirect("/");
+    res.redirect("/category/albums");
 });
 
 
 exports.deleteAlbumById = asyncHandler(async(req,res)=>{
+    const album = await db.getAlbumById(req.params.id);
     const releases = await db.getReleasesByAlbumId(req.params.id);
     console.log(typeof releases);
     console.log(releases)
     res.render("deleteAlbums",{
         allReleases : releases,
+        album : album
     })
 }); 
 

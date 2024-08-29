@@ -1,11 +1,74 @@
 <html>
-    <title>
-        Label Details
-    </title>
-    <body>
-        <span><%= label[0].labelname %></span>
-        <a href="/label/<%=label[0].id%>/update">Edit</a><br><br>
-        <a href="/label/<%=label[0].id%>/delete">Delete</a><br><br>
+    <head>
+        <title>Homepage</title>
+        <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+
+    </head>
+    <body>   
+        
+        <%- include('./sideBar'); %>
+        <div class="rightContainer">
+            <%- include('./header'); %>
+            <div class="infoContainer">
+            <div class="artistInfo">
+                <div class="artistUpdateDelete">
+                    <span><h2><%= label[0].labelname %></h2></span>
+                    <a class="infoLink" href="/label/<%=label[0].id%>/update">
+                        <div class="editButton">
+                             Edit   
+                        </div>
+                    </a>
+                    <a class="infoLink" href="/label/<%=label[0].id%>/delete">
+                        <div class="deleteButton">
+                            Delete
+                        </div>
+                    </a>
+                </div>
+                <div class="artistOtherInfo">
+                    <span><h4>Founded : <%=label[0].yearfounded%> </h4></span>
+                </div>
+            </div>
+     
+            <h2> <%=allAlbums.length%> Albums</h2>
+            <div class="mainContainer">
+                <% for(let i=0;i<allAlbums.length ; i++) { %>
+                    <div class="eachItem eachAlbum">
+                        <div class="itemImage">
+                            <a href="/album/<%=allAlbums[i].id%>"><img src="<%=allAlbums[i].imageurl%>" alt="albumImage"></a>
+                        </div>
+                        <div class="albumCardDetails">
+                            <a href="/album/<%=allAlbums[i].id%>"><p class="itemHeading"><%=allAlbums[i].albumname%></p></a>
+                            <a href="/artist/<%=allAlbums[i].artist_id%>"><p class="itemMinorInfo"><%=allAlbums[i].firstname + " " + allAlbums[i].lastname%></p></a>
+                            <% const d =  new Date(allAlbums[i].releasedate).getFullYear()%>
+                            <!-- <p><%= allAlbums[i].releasedate %></p> -->
+                            <p class="itemMinorInfo"><%= d %></p>
+
+                        </div>
+                    </div>
+                <%}%>
+            </div>
+
+
+            <h2><%=allReleases.length%> Releases</h2>
+                <div class="mainContainer">
+                    <% for(let i=0;i<allReleases.length ; i++) { %>
+                        <div class="eachItem eachAlbum">
+                            <div class="itemImage">
+                                <a href="/release/<%=allReleases[i].id%>"><img src="<%=allReleases[i].imageurl%>" alt="albumImage"></a>
+                            </div>
+                            <div class="releaseDetails">
+                                <a class="albumName" href="/release/<%=allReleases[i].id%>"><p class="itemHeading"><%=allReleases[i].albumname%></p></a>
+                                <a href="/release/<%=allReleases[i].id%>"><p><%=allReleases[i].firstname%></p></a>
+                                <p class="itemMinorInfo" ><%=allReleases[i].format%></p>
+                                <div class="priceAndStock">
+                                    <div class="price">$<%=allReleases[i].price%></div>
+                                    <div class="stock"><%=allReleases[i].stock%> available</div>
+                                </div>
+                            </div>
+                    
+                        </div>
+                    <%}%>
+        </div>
+
     </body>
-    <%- include("albumsAndReleases" ,{allAlbums : allAlbums,allReleases : allReleases }) %>
 </html>

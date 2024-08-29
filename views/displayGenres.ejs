@@ -1,11 +1,27 @@
 <html>
     <head>
-        <title>ALL Genres</title>
+        <title>Homepage</title>
+        <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+
     </head>
-    <body>
-        <br><br>
-        <% for(let i=0;i<allGenres.length ; i++) { %>
-            <a href="/genre/<%=allGenres[i].id%>"><%=allGenres[i].genrename%></a><br><br>
-        <%}%>
+    <body>   
+        
+        <%- include('./sideBar'); %>
+        <div class="rightContainer">
+            <%- include('./header'); %>
+            <div class="mainContainer">
+                <div class="list">
+                    <h3>All Genres</h3>
+                    <% for(let i=0;i<allGenres.length ; i++) { %>
+                    
+                        <a class="infoLink" href="/genre/<%=allGenres[i].id%>"><h4><%=allGenres[i].genrename%></h4></a>
+                        
+                    <%}%>
+
+                </div>
+               
+            </div>
+        </div>
+
     </body>
 </html>

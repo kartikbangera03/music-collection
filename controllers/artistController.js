@@ -57,7 +57,7 @@ exports.updateArtistById = asyncHandler(async(req,res)=>{
 exports.updateArtistByIdPost = asyncHandler(async(req,res)=>{
     const {firstName , lastName ,  birthDate , deathDate, country , imageUrl} = req.body;
     await db.updateArtist(req.params.id , firstName , lastName ,  birthDate , deathDate===""? null : deathDate, country , imageUrl);
-    res.redirect("/")
+    res.redirect("/artist/" +req.params.id )
 });
 
 

@@ -1,12 +1,24 @@
 <html>
-    <title>
-        Genre Details
-    </title>
-    <body>
-        <span><%= genre[0].genrename %></span>
-        <a href="/genre/<%=genre[0].id%>/update">Edit</a><br><br>
-        <a href="/genre/<%=genre[0].id%>/delete">Delete</a><br><br>
+    <head>
+        <title>Homepage</title>
+        <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+
+    </head>
+    <body>   
+        
+        <%- include('./sideBar'); %>
+        <div class="rightContainer">
+            <%- include('./header'); %>
+            <div class="infoContainer">
+                <div class="artistUpdateDelete">
+                    <span><h2><%= genre[0].genrename %></h2></span>
+                    <a class="infoLink" href="/genre/<%=genre[0].id%>/update">Edit</a><br><br>
+                    <a class="infoLink" href="/genre/<%=genre[0].id%>/delete">Delete</a><br><br>
+                </div>
+               
         <%- include("albumsAndReleases" ,{allAlbums : allAlbums,allReleases : allReleases }) %>
+            </div>
+        </div>
+
     </body>
-    
 </html>

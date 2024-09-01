@@ -1,24 +1,28 @@
 <html>
     <head>
-        <title>Homepage</title>
-        <link rel="stylesheet" type="text/css" href="/css/styles.css" />
-
+        <%- include('./titleAndCssLink',{title:title}); %>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>   
         
         <%- include('./sideBar'); %>
         <div class="rightContainer">
             <%- include('./header'); %>
+            <%- include('./dialogDelete', {name : "Genre",linkedItems : "Albums and Releases", itemName: genre[0].genrename, deleteLink : "/genre/"+ genre[0].id +"/delete"}); %>
             <div class="infoContainer">
                 <div class="artistUpdateDelete">
                     <span><h2><%= genre[0].genrename %></h2></span>
-                    <a class="infoLink" href="/genre/<%=genre[0].id%>/update">Edit</a><br><br>
-                    <a class="infoLink" href="/genre/<%=genre[0].id%>/delete">Delete</a><br><br>
+                    <a class="infoLink" href="/genre/<%=genre[0].id%>/update"><i class="fa fa-pencil" style="font-size:24px"></i></a><br><br>
+                    <div class="deleteButton">
+                        <i class="fa fa-trash-o" style="font-size:24px"></i>
+                    </div>
                 </div>
                
-        <%- include("albumsAndReleases" ,{allAlbums : allAlbums,allReleases : allReleases }) %>
+                <%- include("showAlbumsWithArtistName" ,{allAlbums : allAlbums}) %>
+                <%- include("showReleasesWithoutArtistName" ,{allReleases : allReleases }) %>
             </div>
         </div>
 
     </body>
+    <script src="/dialogController.js"></script>
 </html>

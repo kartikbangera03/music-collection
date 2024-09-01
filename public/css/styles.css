@@ -4,6 +4,7 @@
 
 *{
     box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 body{
@@ -14,7 +15,7 @@ body{
 
 .sideBar{
     box-sizing: border-box;    
-    border: 1px solid grey;
+    /* border: 1px solid grey; */
     width: 250px;
     height: 100%;
     position:fixed;
@@ -46,7 +47,7 @@ body{
 
 .mainContainer {
     box-sizing: border-box;
-    padding:30px;
+    padding-left : 30px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     background-color: #ececec;
@@ -72,15 +73,7 @@ body{
 .eachAlbum{
     height: 280px;
     display: flex;
-    flex-direction: column;.sideBar{
-        box-sizing: border-box;    
-        border: 1px solid grey;
-        width: 250px;
-        height: 100%;
-        position:fixed;
-        padding: 0 20px;
-        text-align: right;
-    }
+    flex-direction: column;
     justify-content: space-between;
     padding-bottom: 0;
 }
@@ -292,4 +285,33 @@ button{
 
 .infoLink{
     color: black;
+}
+
+.artistAndAlbumName{
+    display: flex;
+}
+
+a:hover , .itemHeading:hover , .itemMinorInfo:hover{
+    color: grey;
+}
+
+.canceDeleteDiv{
+    display: flex;
+    justify-content: end;
+}
+.cancelButton{
+    margin-top: 10px;
+}
+.mainDeleteButton{
+    background-color: red;
+    font-weight: bold;
+    margin-left: 30px;
+}
+dialog{
+    border-radius: 10px;
+    border: 1px solid lightgray ;
+}
+
+.noYearAlbum{
+    height: 220px;
 }

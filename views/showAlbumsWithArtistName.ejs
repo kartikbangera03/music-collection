@@ -1,12 +1,13 @@
 <h4><%= allAlbums.length %> Albums</h4>
 <div class="mainContainer">
     <% for(let i=0;i<allAlbums.length ; i++) { %>
-        <div class="eachItem eachAlbum noYearAlbum">
+        <div class="eachItem eachAlbum">
             <div class="itemImage">
                 <a href="/album/<%=allAlbums[i].id%>"><img src="<%=allAlbums[i].imageurl%>" alt="albumImage"></a>
             </div>
             <div class="albumCardDetails">
                 <a href="/album/<%=allAlbums[i].id%>"><p class="itemHeading"><%=allAlbums[i].albumname%></p></a>
+                <a href="/artist/<%=allAlbums[i].artist_id%>"><p class="itemMinorInfo"><%=allAlbums[i].firstname + " " + allAlbums[i].lastname%></p></a>
                 <% const d =  new Date(allAlbums[i].releasedate).getFullYear()%>
                 <p class="itemMinorInfo"><%= d %></p>
 

@@ -1,7 +1,6 @@
 <html>
     <head>
-        <title>Homepage</title>
-        <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+        <%- include('./titleAndCssLink',{title:title}); %>
 
     </head>
     <body>   
@@ -10,10 +9,10 @@
         <div class="rightContainer">
             <%- include('./header'); %>
             <div class="infoContainer">
-                <h2>CREATE GENRE</h2>
+                <h3><%=title%></h3>
                 <form method="POST">
                     <label for="genreName">Label Name :
-                        <br><input type="text" name="genreName" id="genreName" required value= <%= typeof genre === "undefined" ? "" : genre[0].genrename %> >
+                        <br><input type="text" name="genreName" id="genreName" required value=<%= typeof genre === "undefined" ? "" : genre[0].genrename %> >
                     </label>
                     <br><br>
                     <button type="submit">Create Genre</button>

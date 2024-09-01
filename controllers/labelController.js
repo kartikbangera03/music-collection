@@ -3,19 +3,20 @@ const asyncHandler = require("express-async-handler");
 const db = require("../db/queries");
 
 exports.labelCreateGet = asyncHandler (async(req,res)=>{
-    res.render("labelCreateForm" , {title:"CREATE NEW LABEL"});
+    res.render("labelForm" , {title:"Create New Label"});
 });
 
 exports.labelCreatePost = asyncHandler (async(req,res)=>{
     const {labelName , yearFounded} = req.body;
     await db.insertLabel(labelName , yearFounded);
-    res.redirect("/");
+    res.redirect("/category/labels");
 });
 
 exports.displayLabels = asyncHandler(async(req,res)=>{
     const labels = await db.getAllLabels();
     res.render("displayLabels" , {
-        allLabels : labels
+        allLabels : labels,
+        title:"Labels"
     })
 })
 
@@ -23,25 +24,26 @@ exports.getLabelById = asyncHandler(async(req,res)=>{
     const label = await db.getLabelById(req.params.id);
     const albums  = await db.getAlbumsByLabelId(req.params.id);
     const releases  = await db.getAllAlbumsAndReleasesByLabelId(req.params.id);
-    console.log("********LABEL DETAILS******")
+    // console.log("********LABEL DETAILS******")
     console.log(label)
-    console.log("ALBUMS")
-    console.log(albums)
-    console.log("RELEASES")
-    console.log(releases);
+    // console.log("ALBUMS")
+    // console.log(albums)
+    // console.log("RELEASES")
+    // console.log(releases);
     
     res.render("labelDetails",{
             label : label,
             allAlbums : albums,
-            allReleases : releases
+            allReleases : releases,
+            title:label[0].labelname
     });
 })
 
 exports.updateLabelById =  asyncHandler(async(req,res)=>{
     const label = await db.getLabelById(req.params.id);
-    title = "UPDATE LABEL";
+    title = "Update Label";
     console.log(label);
-    res.render("labelCreateForm", {label,title})
+    res.render("labelForm", {label,title})
 });
 
 

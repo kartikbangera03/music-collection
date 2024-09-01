@@ -1,27 +1,15 @@
 <html>
     <head>
-        <title>Homepage</title>
-        <link rel="stylesheet" type="text/css" href="/css/styles.css" />
-        <script>
-    
+        <%- include('./titleAndCssLink',{title:title}); %>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         
-            function toggleDeleteForm(){
-                let element  = document.getElementById("deleteForm");
-                if(element.style.display === "none"){
-                    element.style.display = "block";
-                }else{
-                    element.style.display = "none";
-                }
-       
-    
-        }
-        </script>
         </head>
     <body>   
         
         <%- include('./sideBar'); %>
         <div class="rightContainer">
             <%- include('./header'); %>
+            <%- include('./dialogDelete', {name : "Release",linkedItems : "Details like price , stock etc.", itemName: release[0].albumname, deleteLink : "/release/"+ release[0].id + "/delete"}); %>
             <div class="infoContainer">
                 <div class="artistDetails">
                     <div class="artistImage">
@@ -31,30 +19,32 @@
                         <div class="artistUpdateDelete">
 
                             <div class="releasename">
-                                <a href="/artist/<%=release[0].artist_id%>"><h2><%=release[0].firstname + " " + release[0].lastname %></h2></a>
+                                <a class="infoLink" href="/artist/<%=release[0].artist_id%>"><h2><%=release[0].firstname + " " + release[0].lastname %></h2></a>
                                 <h2> - </h2>
-                                <a href="/album/<%=release[0].album_id%>"><h2><%=release[0].albumname%></h2></a>
+                                <a class="infoLink" href="/album/<%=release[0].album_id%>"><h2><%=release[0].albumname%></h2></a>
                             </div>
-                            <a href="/release/<%=release[0].id%>/update">
+                            <a class="infoLink" href="/release/<%=release[0].id%>/update">
                                 <div class="editButton">
-                                     Edit   
+                                    <i class="fa fa-pencil" style="font-size:24px"></i>  
                                 </div>
                             </a>
-                            <a href="/release/<%=release[0].id%>/delete">
+                            <!-- <a class="infoLink" href="/release/<%=release[0].id%>/delete"> -->
                                 <div class="deleteButton">
-                                    Delete
+                                    <i class="fa fa-trash-o" style="font-size:24px"></i>
                                 </div>
-                            </a>
+                            <!-- </a> -->
                         </div>
+                 
+
                         <div class="artistOtherInfo">
-                            <span><h4>Label : <a href="/label/<%=release[0].label_id%>"><%=release[0].labelname%></a></h4></span>
+                            <span><p>Label : <a class="infoLink" href="/label/<%=release[0].label_id%>"><%=release[0].labelname%></a></p></span>
                             <% const d =  new Date(release[0].releasedate).getFullYear()%>
-                            <span><h4>Release : <%= d %></h4></span>
-                            <span><h4>Genre : <a href="/label/<%=release[0].genre_id%>"><%=release[0].genrename%></a></h4></span>
-                            <span><h4>Barcode : <%= release[0].barcode %></h4></span>
-                            <span><h4>Price : $<%= release[0].price %></h4></span>
+                            <span><p>Release : <%= d %></p></span>
+                            <span><p>Genre : <a class="infoLink" href="/label/<%=release[0].genre_id%>"><%=release[0].genrename%></a></p></span>
+                            <span><p>Barcode : <%= release[0].barcode %></p></span>
+                            <span><p>Price : $<%= release[0].price %></p></span>
                             <div class="stock">
-                                <h4>$<%= release[0].stock %> In Stock</h4>
+                                <p><%= release[0].stock %> In Stock</p>
                             </div>
                         </div>
                     </div>
@@ -63,4 +53,5 @@
         </div>
 
     </body>
+    <script src="/dialogController.js"></script>
 </html>

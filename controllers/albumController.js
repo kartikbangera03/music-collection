@@ -6,18 +6,20 @@ exports.albumCreateGet = asyncHandler (async(req,res)=>{
     const artists = await db.getAllArtists();
     const labels = await db.getAllLabels();
     const genres = await db.getAllGenres();
-    res.render("albumCreateForm", {
+
+    res.render("albumForm", {
         allArtists : artists,
         allLabels : labels ,
         allGenres : genres,
-        title:"CREATE NEW ALBUM"
+        title:"Create New Album"
     });
 });
 
 exports.albumCreatePost = asyncHandler (async(req,res)=>{
+    const albumImageLink = "https://iili.io/HlHy9Yx.png";
     const {albumName , artist , label , genre , releaseDate , imageUrl } = req.body;
-    await db.insertAlbum(albumName , artist , label , genre , releaseDate , imageUrl);
-    res.redirect("/");
+    await db.insertAlbum(albumName , artist , label , genre , releaseDate , imageUrl==""?albumImageLink:imageUrl);
+    res.redirect("/category/albums");
 });
 
 
@@ -25,7 +27,8 @@ exports.displayAlbums = asyncHandler(async(req,res)=>{
     const albums = await db.getAllAlbums();
     console.log(albums);
     res.render("displayAllAlbums",{
-        allAlbums : albums
+        allAlbums : albums,
+        title:"Music Inventory-Albums"
     })
 });
 
@@ -33,13 +36,10 @@ exports.displayAlbums = asyncHandler(async(req,res)=>{
 exports.getAlbumById = asyncHandler(async(req,res)=>{
     const album = await db.getAlbumById(req.params.id);
     const releases = await db.getReleasesByAlbumId(req.params.id)
-    console.log("EACH ALBUM");
-    console.log(album);
-    console.log("RELEASES OF ALBUM")
-    console.log(releases);
     res.render("albumDetails" , {
         album :album ,
-        allReleases : releases
+        allReleases : releases,
+        title:album[0].albumname +"-"+album[0].firstname+" "+album[0].lastname
     })
 });
 
@@ -50,12 +50,14 @@ exports.updateAlbumById = asyncHandler(async(req,res)=>{
     const labels = await db.getAllLabels();
     const genres = await db.getAllGenres();
     const releaseDate = new Date(album[0].releasedate).toLocaleString('en-GB', { timeZone: 'UTC' }).split(",")[0].split('/').reverse().join('-');
-        res.render("albumUpdateForm",{
+
+    res.render("albumForm", {
         album : album,
-       releaseDate:releaseDate,
-       allArtists : artists,
-       allLabels : labels ,
-       allGenres : genres
+        releaseDate:releaseDate,
+        allArtists : artists,
+        allLabels : labels ,
+        allGenres : genres,
+        title:"Update Album"
     })
 });
 

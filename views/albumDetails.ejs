@@ -1,14 +1,14 @@
 <html>
     <head>
-        <title>Homepage</title>
-        <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+        <%- include('./titleAndCssLink',{title:title}); %>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>   
         
         <%- include('./sideBar'); %>
         <div class="rightContainer">
             <%- include('./header'); %>
-            
+            <%- include('./dialogDelete', {name : "Album",linkedItems : "Releases", itemName: album[0].albumname, deleteLink : "/album/"+ album[0].id +"/delete"}); %>
             <div class="infoContainer">
                  <div class="artistDetails">
                     <div class="artistImage">
@@ -16,32 +16,36 @@
                     </div>
                     <div class="artistInfo">
                         <div class="artistUpdateDelete">
-                            <span><h1><%=album[0].firstname + " "+ album[0].lastname%> - <%=album[0].albumname%></h1></span>
+
+                            <div class="artistAndAlbumName">
+                                <a class="infoLink" href="/artist/<%=album[0].artist_id%>"><h2><%=album[0].firstname + " "+ album[0].lastname%></h2></a>
+                                <span><h2> - <%=album[0].albumname%></h2></span>
+                            </div>
+                            
                             <a  class="infoLink" href="/album/<%=album[0].id%>/update">
                                 <div class="editButton">
-                                     Edit   
+                                    <i class="fa fa-pencil" style="font-size:24px"></i>  
                                 </div>
                             </a>
-                            <a class="infoLink" href="/album/<%=album[0].id%>/delete">
-                                <div class="deleteButton">
-                                    Delete
-                                </div>
-                            </a>
+                            <div class="deleteButton">
+                                <i class="fa fa-trash-o" style="font-size:24px"></i>
+                            </div>
                         </div>
                         <div class="artistOtherInfo">
-                            <span><h4>Label : <a  class="infoLink" href="/label/<%=album[0].label_id%>"><%=album[0].labelname%></a></h4></span>
+                            <span><p>Label : <a  class="infoLink" href="/label/<%=album[0].label_id%>"><%=album[0].labelname%></a></p></span>
                             <% const d =  new Date(album[0].releasedate).getFullYear()%>
-                            <span><h4>Release : <%= d %></h4></span>
-                            <span><h4>Genre : <a  class="infoLink" href="/label/<%=album[0].genre_id%>"><%=album[0].genrename%></a></h4></span>
+                            <span><p>Release : <%= d %></p></span>
+                            <span><p>Genre : <a  class="infoLink" href="/label/<%=album[0].genre_id%>"><%=album[0].genrename%></a></p></span>
                             
                         </div>
                     </div>
                 </div>
                 
-            <%- include("showReleases" ,{allReleases : allReleases }) %>
+            <%- include("showReleasesWithoutArtistName" ,{allReleases : allReleases }) %>
 
 
         </div>
 
     </body>
+    <script src="/dialogController.js"></script>
 </html>

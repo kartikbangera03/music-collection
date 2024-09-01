@@ -1,7 +1,6 @@
 <html>
     <head>
-        <title>Homepage</title>
-        <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+        <%- include('./titleAndCssLink',{title:title}); %>
 
     </head>
     <body>   
@@ -10,7 +9,7 @@
         <div class="rightContainer">
             <%- include('./header'); %>
             <div class="infoContainer">
-                <h2>CREATE RELEASE </h2>
+                <h3><%= title %></h3>
                 <form  method="POST">
                     <label for="album">Select Album : 
                         <select name="album" id="album" required>
@@ -22,11 +21,25 @@
                     <br><br>
 
                     <label for="format">Format :
-                        <select name="format" id="format">
-                            <option value="CD" <%= typeof release !== "undefined" && "CD" === release[0].format? 'selected' : '' %> >CD</option>
-                            <option value="Vinyl" <%= typeof release !== "undefined" && "Vinyl" === release[0].format ? 'selected' : '' %> >Vinyl</option>
-                            <option value="Cassette" <%= typeof release !== "undefined" && "Cassette" === release[0].format ? 'selected' : '' %> >Cassette</option>
-                            <option value="Digital" <%= typeof release !== "undefined" && "Digital" === release[0].format ? 'selected' : '' %> >Digital</option>
+                        <select name="format" id="format" required>
+                            <% if(typeof release === "undefined"){%>
+                                <option value="" disabled="true" selected >---Please Select Format---</option>
+                                <option value="CD">CD</option>
+                                <option value="Vinyl" >Vinyl</option>
+                                <option value="Cassette" >Cassette</option>
+                                <option value="Digital" >Digital</option>
+
+                            <% } else {%>
+                                <!-- <option value="CD" <%= typeof release !== "undefined" && "CD" === release[0].format? 'selected' : '' %> >CD</option>
+                                <option value="Vinyl" <%= typeof release !== "undefined" && "Vinyl" === release[0].format ? 'selected' : '' %> >Vinyl</option>
+                                <option value="Cassette" <%= typeof release !== "undefined" && "Cassette" === release[0].format ? 'selected' : '' %> >Cassette</option>
+                                <option value="Digital" <%= typeof release !== "undefined" && "Digital" === release[0].format ? 'selected' : '' %> >Digital</option> -->
+                                <option value="CD" <%= "CD" === release[0].format? 'selected' : '' %> >CD</option>
+                                <option value="Vinyl" <%= "Vinyl" === release[0].format ? 'selected' : '' %> >Vinyl</option>
+                                <option value="Cassette" <%= "Cassette" === release[0].format ? 'selected' : '' %> >Cassette</option>
+                                <option value="Digital" <%= "Digital" === release[0].format ? 'selected' : '' %> >Digital</option>
+                            <%}%>
+                        
                         </select>
 
                     </label> 
@@ -34,7 +47,7 @@
                     <br><br>
                     <label for="price">
                         Price : 
-                        <br><input type="number" id="price" name="price" required value= <%=typeof release === "undefined" ? "" : release[0].price  %>>
+                        <br><input type="number" step="0.01" min="0" id="price" name="price" required value= <%=typeof release === "undefined" ? "" : release[0].price  %>>
                     </label>
                     <br><br>
                     <label for="stock">

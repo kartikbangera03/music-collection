@@ -1,6 +1,7 @@
 <html>
     <head>
         <%- include('./titleAndCssLink',{title:title}); %>
+
     </head>
     <body>   
         
@@ -8,9 +9,11 @@
         <div class="rightContainer">
             <%- include('./header'); %>
             <div class="infoContainer">
-                <%- include("showAlbumsWithArtistName" ,{allAlbums : allAlbums}) %>
+                <h3>Results</h3>
+                <%- include("showArtists" ,{allArtists : allArtists }) %>
+                <%- include("showAlbumsWithArtistName" ,{allAlbums :allAlbums }) %>
+                <%- include("showReleases" ,{allReleases :allReleases }) %>
             </div>
-           
         </div>
 
     </body>

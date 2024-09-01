@@ -1,9 +1,8 @@
 
 <html>
     <head>
-        <title>Homepage</title>
-        <link rel="stylesheet" type="text/css" href="/css/styles.css" />
-
+        <%- include('./titleAndCssLink',{title:title}); %>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>   
         
@@ -11,7 +10,7 @@
         <div class="rightContainer">
             <%- include('./header'); %>
             <div class="infoContainer">
-
+                <%- include('./dialogDelete', {name : "Artist",linkedItems : "Albums and Releases", itemName: artist[0].firstname +" "+artist[0].lastname, deleteLink : "/artist/"+ artist[0].id +"/delete"}); %>
 
                  <div class="artistDetails">
                     <div class="artistImage">
@@ -19,17 +18,15 @@
                     </div>
                     <div class="artistInfo">
                         <div class="artistUpdateDelete">
-                            <span><h1><%= artist[0].firstname %></h1></span>
+                            <span><h1><%= artist[0].firstname +" "+artist[0].lastname %></h1></span>
                             <a  class="infoLink" href="/artist/<%=artist[0].id%>/update">
                                 <div class="editButton">
-                                     Edit   
+                                    <i class="fa fa-pencil" style="font-size:24px"></i>  
                                 </div>
                             </a>
-                            <a class="infoLink" href="/artist/<%=artist[0].id%>/delete">
-                                <div class="deleteButton">
-                                    Delete
-                                </div>
-                            </a>
+                            <div class="deleteButton">
+                                <i class="fa fa-trash-o" style="font-size:24px"></i>
+                            </div>
                         </div>
                         <div class="artistOtherInfo">
                             <% const d = new Date(artist[0].birthdate).toDateString() %>
@@ -40,11 +37,12 @@
                     </div>
                 </div>
                 <%- include("showAlbumsWithYear" ,{allAlbums : allAlbums}) %>
-                <%- include("showReleases" ,{allReleases : allReleases }) %>
+                <%- include("showReleasesWithoutArtistName" ,{allReleases : allReleases }) %>
             </div>
 
             
         </div>
 
     </body>
+    <script src="/dialogController.js"></script>
 </html>

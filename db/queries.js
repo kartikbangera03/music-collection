@@ -75,7 +75,7 @@ async function getReleaseById(id){
   const {rows} = await pool.query(`
   SELECT 
   releases.id, releases.format,releases.album_id , releases.format, releases.price , releases.stock , releases.barcode , releases.imageurl ,
-  albums.albumname, albums.artist_id, albums.imageurl, albums.releasedate ,
+  albums.albumname, albums.artist_id, releases.imageurl, albums.releasedate ,
   artists.firstname , artists.lastname ,
   labels.labelname , albums.label_id , genres.genrename , albums.genre_id
   FROM releases 
@@ -131,7 +131,7 @@ async function getGenreById(id){
 }
 
 async function getAlbumsByGenreId(id){
-  const { rows } = await pool.query("SELECT * FROM albums WHERE albums.genre_id = ($1)",[id]);
+   const { rows } = await pool.query("SELECT albums.id , albums.albumname, albums.artist_id, albums.imageurl, albums.releasedate , artists.firstname , artists.lastname FROM albums JOIN artists ON albums.artist_id = artists.id WHERE albums.genre_id = ($1)",[id]);
   return rows;
 }
 
@@ -293,9 +293,24 @@ async function getLowStockReleases(){
   return rows;
 }
 
+async function getAllArtistsBySearchQuery(searchQuery){
+  const {rows} = await pool.query("SELECT artists.id , artists.imageurl , artists.firstname , artists.lastname FROM artists WHERE LOWER(artists.firstname) LIKE '%'||$1||'%' OR LOWER(artists.lastname) LIKE '%'||$1||'%' ",[searchQuery]);
+  return rows;
+}
+
+async function getAllAlbumsBySearchQuery(searchQuery){
+  const { rows } = await pool.query("SELECT albums.id , albums.albumname, albums.artist_id, albums.imageurl, albums.releasedate , artists.firstname , artists.lastname FROM albums JOIN artists ON albums.artist_id = artists.id WHERE LOWER(albums.albumname) LIKE '%'||$1||'%' OR  LOWER(artists.firstname) LIKE '%'||$1||'%' OR LOWER(artists.lastname) LIKE '%'||$1||'%' " , [searchQuery]);
+  return rows;
+}
+
+async function getAllReleasesBySearchQuery(searchQuery){
+  const { rows } = await pool.query("SELECT albums.artist_id ,releases.id, albums.albumname , artists.firstname , artists.lastname,  releases.format,releases.album_id , releases.imageurl , releases.price , releases.stock FROM releases JOIN albums on releases.album_id = albums.id JOIN artists on albums.artist_id = artists.id WHERE LOWER(albums.albumname) LIKE '%'||$1||'%'", [searchQuery]);
+  return rows;
+}
+
 
 module.exports = {
-  
+ 
   getAllArtists,
   insertArtist,
   getAllLabels,
@@ -337,5 +352,8 @@ module.exports = {
   getReleasesCount,
   getReleasesCountByLowStock,
   getLatestReleases,
-  getLowStockReleases
+  getLowStockReleases,
+  getAllArtistsBySearchQuery,
+  getAllAlbumsBySearchQuery,
+  getAllReleasesBySearchQuery,
 };

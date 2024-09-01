@@ -16,7 +16,8 @@ exports.getDashBoard = asyncHandler(async(req,res)=>{
         allReleases : latestReleases , 
         albumCount , 
         releaseCount , 
-        lowStockReleaseCount
+        lowStockReleaseCount,
+        title:"Music Inventory"
     })
 });
 

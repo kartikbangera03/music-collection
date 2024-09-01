@@ -1,7 +1,6 @@
 <html>
     <head>
-        <title>Homepage</title>
-        <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+        <%- include('./titleAndCssLink',{title:title}); %>
     </head>
     <body>        
         <%- include('./sideBar'); %>
@@ -9,10 +8,14 @@
             <%- include('./header'); %>
             <div class="mainContainer">
                 <div class="list">
-                    <h2>All Labels</h2>
-                    <% for(let i=0;i<allLabels.length ; i++) { %>
-                        <a class="infoLink" href="/label/<%=allLabels[i].id%>"><h4><%=allLabels[i].labelname%></h4></a>
-                    <%}%>
+                    <h3>All Labels</h3>
+                    <ul>
+                        <% for(let i=0;i<allLabels.length ; i++) { %>
+                            <li><a class="infoLink" href="/label/<%=allLabels[i].id%>"><h4> <%=allLabels[i].labelname%></h4></a></li>
+                            
+                        <%}%>
+                    </ul>
+                  
                 </div>  
             </div>
         </div>

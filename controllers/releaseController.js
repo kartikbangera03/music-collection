@@ -4,15 +4,18 @@ const db = require("../db/queries");
 
 exports.releaseCreateGet = asyncHandler (async(req,res)=>{
     const albums = await db.getAllAlbums()
-    res.render("releaseCreateForm",{
-        allAlbums : albums
+
+    res.render("releaseForm",{
+        allAlbums : albums,
+        title:"Create Release"
     });
 });
 
 exports.releaseCreatePost = asyncHandler (async(req,res)=>{
+    const releaseImageLink = "https://static.vecteezy.com/system/resources/thumbnails/034/737/636/small_2x/vinyl-record-in-pack-vector.jpg";
     const {album , format , price , stock ,barcode , imageUrl} = req.body;
-    await db.insertRelease(album , format , price , stock ,barcode , imageUrl);
-    res.redirect("/");
+    await db.insertRelease(album , format , price , stock ,barcode , imageUrl==""?releaseImageLink:imageUrl);
+    res.redirect("/category/releases");
     // res.send(req.body)
 });
 
@@ -21,7 +24,8 @@ exports.displayReleases = asyncHandler(async(req,res)=>{
     console.log("ALL RELEASES");
     console.log(releases);
     res.render("displayReleases" , {
-        allReleases : releases
+        allReleases : releases,
+        title: "Releases"
     })
 })
 
@@ -30,7 +34,8 @@ exports.getReleaseById = asyncHandler(async (req,res)=>{
     console.log("RELEASE BY ID : "+req.params.id);
     console.log(release);
     res.render("releaseDetails",{
-        release : release
+        release : release,
+        title:release[0].albumname +"-Release"
     })
 })
 
@@ -40,9 +45,11 @@ exports.updateReleaseById =  asyncHandler(async(req,res)=>{
     const albums = await db.getAllAlbums()
     console.log("UPDATE RELEASE FOR ID : "+req.params.id);
     console.log(release);
-    res.render("releaseCreateForm", {
+
+    res.render("releaseForm", {
         release : release,
-        allAlbums : albums
+        allAlbums : albums,
+        title:"Update Release"
     });
 });
 

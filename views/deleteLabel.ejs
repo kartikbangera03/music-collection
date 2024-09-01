@@ -1,7 +1,6 @@
 <html>
     <head>
-        <title>Homepage</title>
-        <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+        <%- include('./titleAndCssLink',{title:title}); %>
         <script>
     
         
@@ -41,12 +40,7 @@
                 <button type = "submit">DELETE</button>
             </form>
         </div>
-        <!-- <h2>Releases</h2>
-        <% for(let i=0;i<allReleases.length ; i++) { %>
-            <a href="/release/<%=allReleases[i].id%>"><%=allReleases[i].albumname%></a>
-            <p>Format : <%=allReleases[i].format%></p>
-            <br><br>
-        <%}%> -->
+ 
         <%- include("albumsAndReleases" ,{allAlbums : allAlbums,allReleases : allReleases }) %>
             </div>
         </div>

@@ -1,4 +1,4 @@
-<p><%= allReleases.length %> Releases</p>
+<h4><%= allReleases.length %> Releases</h4>
 <div class="mainContainer">
     <% for(let i=0;i<allReleases.length ; i++) { %>
     
@@ -8,7 +8,6 @@
             </div>
             <div class="releaseDetails">
                 <a class="albumName" href="/release/<%=allReleases[i].id%>"><p class="itemHeading"><%=allReleases[i].albumname%></p></a>
-                <a  class="infoLink" href="/artist/<%=allReleases[i].artist_id%>"><p><%=allReleases[i].firstname + " "+ allReleases[i].lastname%></p></a>
                 <p><%=allReleases[i].format%></p>
                 <div class="priceAndStock">
                     <div class="price itemMinorInfo">$<%=allReleases[i].price%></div>

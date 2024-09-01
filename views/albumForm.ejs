@@ -1,0 +1,99 @@
+<html>
+    <head>
+        <%- include('./titleAndCssLink',{title:title}); %>
+
+    </head>
+    <body>   
+        
+        <%- include('./sideBar'); %>
+        <div class="rightContainer">
+            <%- include('./header'); %>
+            
+            <h3><%= title %></h3>
+            <div class="mainContainer">
+                
+                <form method="POST">
+                    <label for="albumName">
+                        TITLE : 
+                        
+                        <input type="text" id="albumName" name="albumName" required value = "<%= typeof album === "undefined" ? "" : album[0].albumname %>" >
+                    </label>
+                    <br><br>
+                    <label for="artist">SELECT ARTIST : 
+                        <select name="artist" id="artist" required>                
+                           
+                                <% if(typeof album === "undefined") { %>
+                                    <option value="" disabled="true" selected>--Please Select Artist---</option>
+                                    <% allArtists.forEach((artist)=>{ %>
+                                        <option value= <%=artist.id %> > <%=artist.firstname + " " + artist.lastname%> </option>
+                                    <% }) %>
+                                 <% }else{ %>
+                                    <% allArtists.forEach((artist)=>{ %>
+                                        <option value= "<%=artist.id%>"  <%=artist.id === album[0].artist_id ? 'selected' : '' %> > <%=artist.firstname%> </option> 
+                                    <% }) %>
+                                <% } %>
+                           
+                        </select> 
+        
+                    </label>
+                    <br><br>
+                    <label for="label">SELECT LABEL : 
+                        <select name="label" id="label" required>
+                            
+                                <% if(typeof album === "undefined") { %>
+                                    <option value="" disabled="true" selected>--Please Select Label---</option>
+                                    <% allLabels.forEach((label)=>{ %>
+                                        <option value= <%=label.id %> > <%=label.labelname %> </option>
+                                    <% }) %>
+                                 <% }else{ %>
+                                    <% allLabels.forEach((label)=>{ %>
+                                        <option value= "<%=label.id%>"  <%=label.id === album[0].label_id ? 'selected' : '' %> > <%= label.labelname %> </option> 
+                                    <% }) %>
+                                <% } %>
+                            
+
+                            
+                        </select> 
+        
+                    </label>
+                    <br><br>
+                    <label for="genre">SELECT GENRE : 
+                        <select name="genre" id="genre" required>
+                            
+                                
+
+                                <% if(typeof album === "undefined") { %>
+                                    <option value="" disabled="true" selected>--Please Select Genre---</option>
+                                    <% allGenres.forEach((genre)=>{ %>
+                                        <option value= <%=genre.id %> > <%=genre.genrename %> </option>
+                                    <% }) %>
+                                 <% }else{ %>
+                                    <% allGenres.forEach((genre)=>{ %>
+                                        <option value= "<%=genre.id%>"  <%=genre.id === album[0].genre_id ? 'selected' : '' %> > <%= genre.genrename %> </option>  
+                                    <% }) %>
+                                <% } %>
+                          
+                        </select> 
+        
+                    </label>
+                    <br><br>
+                    <label for="releaseDate">RELEASE DATE
+                        
+                        <input type="date" name="releaseDate" id="releaseDate" required value="<%= typeof album === "undefined" ? "" : releaseDate %>"  >
+                    </label>
+                    <br><br>
+        
+                    <label for="imageUrl">Image Url :
+                        
+                        <br> <input type="url" name="imageUrl" id="imageUrl" placeholder="https://example.com" pattern="https://.*" value="<%= typeof album === "undefined" ? "" :album[0].imageurl%>" >
+                        
+                    </label>
+                   
+                    <br><br>
+                    <button type="submit">Update ALBUM</button>
+                </form>
+            </div>
+        </div>
+
+    </body>
+</html>

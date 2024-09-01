@@ -1,8 +1,6 @@
 <html>
     <head>
-        <title>Homepage</title>
-        <link rel="stylesheet" type="text/css" href="/css/styles.css" />
-
+        <%- include('./titleAndCssLink',{title:title}); %>
     </head>
     <body>   
         
@@ -10,7 +8,7 @@
         <div class="rightContainer">
             <%- include('./header'); %>
             <div class="infoContainer">
-                <h3>ALL ARTIST</h3>    
+                <h4>ALL ARTIST</h4>    
                 <div class="mainContainer">
 
                 
@@ -21,7 +19,7 @@
                             </div>
                             <div class="itemName">
                                 <div class="artistName">
-                                    <a class="infoLink" href="/artist/<%=allArtists[i].id%>"><%=allArtists[i].firstname%></a>
+                                    <a class="infoLink" href="/artist/<%=allArtists[i].id%>"><%=allArtists[i].firstname + " " + allArtists[i].lastname%></a>
                                 </div>
                             </div>
     

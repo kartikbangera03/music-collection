@@ -8,14 +8,24 @@
         <%- include('./sideBar'); %>
         <div class="rightContainer">
             <%- include('./header'); %>
-            <div class="infoContainer">
+            <div class="formContainer">
                 <h3><%= title %></h3>
+                
                 <form  method="POST">
                     <label for="album">Select Album : 
                         <select name="album" id="album" required>
-                            <% allAlbums.forEach((album)=>{ %>
-                                <option value="<%=album.id%>"  <%= typeof release !== "undefined" &&  album.id === release[0].album_id ? 'selected' : '' %> > <%=album.albumname%> </option>  
-                            <% }) %>
+
+                            <% if(typeof release === "undefined"){%>
+                                <option value="" disabled="true" selected >---Please Select Album---</option>
+                                <% allAlbums.forEach((album)=>{ %>
+                                    <option value="<%=album.id%>" > <%=album.albumname%> </option>  
+                                <% }) %>
+                            <% } else {%>
+                                <% allAlbums.forEach((album)=>{ %>
+                                    <option value="<%=album.id%>"  <%= album.id === release[0].album_id ? 'selected' : '' %> > <%=album.albumname%> </option>  
+                                <% }) %>
+                            <%}%>
+                           
                         </select> 
                     </label>
                     <br><br>

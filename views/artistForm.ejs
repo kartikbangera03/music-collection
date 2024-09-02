@@ -9,9 +9,9 @@
         <%- include('./sideBar'); %>
         <div class="rightContainer">
             <%- include('./header'); %>
-            <h3><%= title %></h3>
-            <div class="mainContainer">
             
+            <div class="formContainer">
+                <h3><%= title %></h3>
                 <form  method="POST">
                     <label for="firstName">First Name :
                         <input type="text" name="firstName" id="firstName" required value="<%= typeof artist === "undefined" ? "" : artist[0].firstname %>" >

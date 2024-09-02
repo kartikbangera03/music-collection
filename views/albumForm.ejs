@@ -9,17 +9,17 @@
         <div class="rightContainer">
             <%- include('./header'); %>
             
-            <h3><%= title %></h3>
-            <div class="mainContainer">
+            <div class="formContainer">
+                <h3><%= title %></h3>
                 
                 <form method="POST">
                     <label for="albumName">
-                        TITLE : 
+                        Title : 
                         
                         <input type="text" id="albumName" name="albumName" required value = "<%= typeof album === "undefined" ? "" : album[0].albumname %>" >
                     </label>
                     <br><br>
-                    <label for="artist">SELECT ARTIST : 
+                    <label for="artist">Select Artist: 
                         <select name="artist" id="artist" required>                
                            
                                 <% if(typeof album === "undefined") { %>
@@ -37,7 +37,7 @@
         
                     </label>
                     <br><br>
-                    <label for="label">SELECT LABEL : 
+                    <label for="label">Select Label : 
                         <select name="label" id="label" required>
                             
                                 <% if(typeof album === "undefined") { %>
@@ -57,7 +57,7 @@
         
                     </label>
                     <br><br>
-                    <label for="genre">SELECT GENRE : 
+                    <label for="genre">Select Genre: 
                         <select name="genre" id="genre" required>
                             
                                 
@@ -77,7 +77,7 @@
         
                     </label>
                     <br><br>
-                    <label for="releaseDate">RELEASE DATE
+                    <label for="releaseDate">Release Date
                         
                         <input type="date" name="releaseDate" id="releaseDate" required value="<%= typeof album === "undefined" ? "" : releaseDate %>"  >
                     </label>

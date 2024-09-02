@@ -7,7 +7,7 @@ exports.releaseCreateGet = asyncHandler (async(req,res)=>{
 
     res.render("releaseForm",{
         allAlbums : albums,
-        title:"Create Release"
+        title:"Create New Release"
     });
 });
 
@@ -21,8 +21,8 @@ exports.releaseCreatePost = asyncHandler (async(req,res)=>{
 
 exports.displayReleases = asyncHandler(async(req,res)=>{
     const releases = await db.getAllReleases();
-    console.log("ALL RELEASES");
-    console.log(releases);
+    // console.log("ALL RELEASES");
+    // console.log(releases);
     res.render("displayReleases" , {
         allReleases : releases,
         title: "Releases"
@@ -31,8 +31,8 @@ exports.displayReleases = asyncHandler(async(req,res)=>{
 
 exports.getReleaseById = asyncHandler(async (req,res)=>{
     const release  = await db.getReleaseById(req.params.id);
-    console.log("RELEASE BY ID : "+req.params.id);
-    console.log(release);
+    // console.log("RELEASE BY ID : "+req.params.id);
+    // console.log(release);
     res.render("releaseDetails",{
         release : release,
         title:release[0].albumname +"-Release"
@@ -43,8 +43,8 @@ exports.getReleaseById = asyncHandler(async (req,res)=>{
 exports.updateReleaseById =  asyncHandler(async(req,res)=>{
     const release = await db.getReleaseById(req.params.id);
     const albums = await db.getAllAlbums()
-    console.log("UPDATE RELEASE FOR ID : "+req.params.id);
-    console.log(release);
+    // console.log("UPDATE RELEASE FOR ID : "+req.params.id);
+    // console.log(release);
 
     res.render("releaseForm", {
         release : release,

@@ -6,9 +6,9 @@
         <%- include('./sideBar'); %>
         <div class="rightContainer">
             <%- include('./header'); %>
-            <div class="mainContainer">
-                <div class="list">
-                    <h3>All Labels</h3>
+            <div class="infoContainer">
+             
+                    <h4>All Labels</h4>
                     <ul>
                         <% for(let i=0;i<allLabels.length ; i++) { %>
                             <li><a class="infoLink" href="/label/<%=allLabels[i].id%>"><h4> <%=allLabels[i].labelname%></h4></a></li>
@@ -16,7 +16,7 @@
                         <%}%>
                     </ul>
                   
-                </div>  
+              
             </div>
         </div>
     </body>

@@ -4,14 +4,14 @@ const db = require("../db/queries");
 
 
 exports.artistCreateGet = asyncHandler (async(req,res)=>{
-    res.render("artistForm" , {title:"Create Artist"});
+    res.render("artistForm" , {title:"Create New Artist"});
 });
 
 exports.artistCreatePost = asyncHandler (async(req,res)=>{
     const artistImageLink = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRULocmP6cP6JYFZmzMlbVHbWwu-oAdX5NaQ&s";
     const {firstName , lastName ,  birthDate , deathDate, country , imageUrl} = req.body;
     await db.insertArtist(firstName , lastName ,  birthDate , deathDate===""? null : deathDate, country , imageUrl==""?artistImageLink:imageUrl);
-    res.redirect("/");
+    res.redirect("/category/artists");
 });
 
 exports.displayArtists = asyncHandler(async(req,res)=>{
@@ -44,7 +44,7 @@ exports.getArtistById = asyncHandler(async(req,res)=>{
 
 exports.updateArtistById = asyncHandler(async(req,res)=>{
     const artist = await db.getArtistById(req.params.id);
-    console.log(artist);
+    // console.log(artist);
     const birthDate = new Date(artist[0].birthdate).toLocaleString('en-GB', { timeZone: 'UTC' }).split(",")[0].split('/').reverse().join('-')
     const deathDate = artist[0].deathdate 
                     ? new Date(artist[0].deathdate).toLocaleString('en-GB', { timeZone: 'UTC' }).split(",")[0].split('/').reverse().join('-') 
@@ -64,20 +64,6 @@ exports.updateArtistByIdPost = asyncHandler(async(req,res)=>{
     await db.updateArtist(req.params.id , firstName , lastName ,  birthDate , deathDate===""? null : deathDate, country , imageUrl);
     res.redirect("/artist/" +req.params.id )
 });
-
-
-exports.deleteArtistById = asyncHandler(async(req,res)=>{
-    const artist = await db.getArtistById(req.params.id);
-    const albums = await db.getAlbumsByArtistId(req.params.id);
-    const releases = await db.getReleasesByAlbumId(req.params.id);
-
-    res.render("deleteArtist",{
-        artist : artist,
-        allAlbums : albums,
-        allReleases : releases
-    });
-});
-
 
 exports.deleteArtistByIdPost =  asyncHandler(async(req,res)=>{
     const albums = await db.getAlbumsByArtistId(req.params.id);

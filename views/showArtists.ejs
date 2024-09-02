@@ -1,17 +1,16 @@
-<p><%= allArtists.length %> Artists</p>
+<h4><%= allArtists.length %> Artists</h4>
 <div class="mainContainer">
 
                 
     <% for(let i=0;i<allArtists.length ; i++) { %>
-        <div class="eachItem eachArtist">
-            <div class="itemImage">
+        <div class="eachCard artistCard">
+            <div class="cardImageDiv">
                 <a href="/artist/<%=allArtists[i].id%>"><img src="<%=allArtists[i].imageurl%>" alt="artistImage"></a>
             </div>
-            <div class="itemName">
-                <div class="artistName">
-                    <a class="infoLink" href="/artist/<%=allArtists[i].id%>"><%=allArtists[i].firstname + " "+allArtists[i].lastname%></a>
-                </div>
+            <div class="cardInfoDiv">
+                <div class="cardHeading"><a class="infoLink" href="/artist/<%=allArtists[i].id%>"><%=allArtists[i].firstname + " "+allArtists[i].lastname%></a></div>
             </div>
+            
 
         </div>
     <%}%>

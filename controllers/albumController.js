@@ -25,7 +25,7 @@ exports.albumCreatePost = asyncHandler (async(req,res)=>{
 
 exports.displayAlbums = asyncHandler(async(req,res)=>{
     const albums = await db.getAllAlbums();
-    console.log(albums);
+    // console.log(albums);
     res.render("displayAllAlbums",{
         allAlbums : albums,
         title:"Music Inventory-Albums"
@@ -73,8 +73,8 @@ exports.updateAlbumByIdPost = asyncHandler(async(req,res)=>{
 exports.deleteAlbumById = asyncHandler(async(req,res)=>{
     const album = await db.getAlbumById(req.params.id);
     const releases = await db.getReleasesByAlbumId(req.params.id);
-    console.log(typeof releases);
-    console.log(releases)
+    // console.log(typeof releases);
+    // console.log(releases)
     res.render("deleteAlbums",{
         allReleases : releases,
         album : album

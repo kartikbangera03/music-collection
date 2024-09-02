@@ -8,11 +8,12 @@
         <%- include('./sideBar'); %>
         <div class="rightContainer">
             <%- include('./header'); %>
-            <div class="infoContainer">
-                <h3><%=title%></h3>
+            <div class="formContainer">
+                <h3><%= title %></h3>
+                
                 <form method="POST">
-                    <label for="genreName">Label Name :
-                        <br><input type="text" name="genreName" id="genreName" required value=<%= typeof genre === "undefined" ? "" : genre[0].genrename %> >
+                    <label for="genreName">Genre Name :
+                        <br><input type="text" name="genreName" id="genreName" required value="<%= typeof genre === "undefined" ? "" : genre[0].genrename %>" >
                     </label>
                     <br><br>
                     <button type="submit">Create Genre</button>

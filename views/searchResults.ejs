@@ -9,7 +9,7 @@
         <div class="rightContainer">
             <%- include('./header'); %>
             <div class="infoContainer">
-                <h3>Results</h3>
+                <h4><%=title%></h4>
                 <%- include("showArtists" ,{allArtists : allArtists }) %>
                 <%- include("showAlbumsWithArtistName" ,{allAlbums :allAlbums }) %>
                 <%- include("showReleases" ,{allReleases :allReleases }) %>

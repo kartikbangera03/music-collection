@@ -8,11 +8,12 @@
         <%- include('./sideBar'); %>
         <div class="rightContainer">
             <%- include('./header'); %>
-            <div class="infoContainer">
-                <h2><%= title%></h2>
+            <div class="formContainer">
+                <h3><%= title %></h3>
+                
                 <form method="POST">
                     <label for="labelName">Label Name :
-                        <br><input type="text" name="labelName" id="labelName" required  value= <%=typeof label === "undefined" ? "" : label[0].labelname  %> >
+                        <br><input type="text" name="labelName" id="labelName" required  value= "<%= typeof label === "undefined" ? "" : label[0].labelname  %>" >
                     </label>
                     <br><br>
                     <label for="yearFounded">Year Founded :

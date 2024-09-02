@@ -284,7 +284,7 @@ async function getReleasesCountByLowStock(){
 }
 
 async function getLatestReleases(){
-  const { rows } = await pool.query("SELECT releases.id,  albums.artist_id  ,albums.albumname , artists.firstname , artists.lastname,  releases.format,releases.album_id , releases.imageurl , releases.price , releases.stock FROM releases JOIN albums on releases.album_id = albums.id JOIN artists on albums.artist_id = artists.id ORDER BY releases.id DESC LIMIT 8");
+  const { rows } = await pool.query("SELECT releases.id,  albums.artist_id  ,albums.albumname , artists.firstname , artists.lastname,  releases.format,releases.album_id , releases.imageurl , releases.price , releases.stock FROM releases JOIN albums on releases.album_id = albums.id JOIN artists on albums.artist_id = artists.id ORDER BY releases.id DESC LIMIT 12");
   return rows;
 }
 

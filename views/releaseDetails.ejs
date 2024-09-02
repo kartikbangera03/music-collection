@@ -9,8 +9,9 @@
         <%- include('./sideBar'); %>
         <div class="rightContainer">
             <%- include('./header'); %>
-            <%- include('./dialogDelete', {name : "Release",linkedItems : "Details like price , stock etc.", itemName: release[0].albumname, deleteLink : "/release/"+ release[0].id + "/delete"}); %>
-            <div class="infoContainer">
+            
+            <div class="bodyContainer">
+                <%- include('./dialogDelete', {name : "Release",linkedItems : "Details like price , stock etc.", itemName: release[0].albumname, deleteLink : "/release/"+ release[0].id + "/delete"}); %>
                 <div class="artistDetails">
                     <div class="artistImage">
                         <img src="<%=release[0].imageurl%>" alt="">

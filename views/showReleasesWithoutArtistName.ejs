@@ -1,4 +1,4 @@
-<h4><%= allReleases.length %> Releases</h4>
+<!-- <h4><%= allReleases.length %> Releases</h4>
 <div class="mainContainer">
     <% for(let i=0;i<allReleases.length ; i++) { %>
     
@@ -12,6 +12,32 @@
                 <div class="priceAndStock">
                     <div class="price itemMinorInfo">$<%=allReleases[i].price%></div>
                     <div class="stock"><%=allReleases[i].stock%> available</div>
+                </div>
+            </div>
+    
+        </div>
+    <%}%>
+</div> -->
+
+<h4><%= allReleases.length %> Releases</h4>
+<div class="mainContainer">
+    <% for(let i=0;i<allReleases.length ; i++) { %>
+    
+        <div class="eachCard withoutArtistReleaseCard">
+            <div class="cardImageDiv">
+                <a href="/release/<%=allReleases[i].id%>"><img src="<%=allReleases[i].imageurl%>" alt="albumImage"></a>
+            </div>
+            <div class="cardInfoDiv">
+
+                <div class="cardHeading"><a class="albumName" href="/release/<%=allReleases[i].id%>"><%=allReleases[i].albumname%></a></div>
+                
+                <!-- <div class="cardInfo"><a  class="infoLink" href="/artist/<%=allReleases[i].artist_id%>"><%=allReleases[i].firstname + " "+ allReleases[i].lastname%></a></div> -->
+
+                <div class="cardInfo"><%=allReleases[i].format%></div>
+             
+                <div class="cardInfo priceStockDiv">
+                    <div class="cardPrice">$<%=allReleases[i].price%></div>
+                    <div class="cardStock"><%=allReleases[i].stock%> available</div>
                 </div>
             </div>
     

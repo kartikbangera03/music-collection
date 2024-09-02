@@ -11,7 +11,7 @@
             <%- include('./header'); %>
 
 
-            <div class="infoContainer">
+            <!-- <div class="infoContainer">
                 <h3>All Releases</h3>
                 <div class="mainContainer">
                     <% for(let i=0;i<allReleases.length ; i++) { %>
@@ -33,6 +33,10 @@
                         </div>
                     <%}%>
                 </div>
+            </div> -->
+
+            <div class="infoContainer">
+                <%- include("showReleases" ,{allReleases : allReleases }) %>
             </div>
         </div>
 

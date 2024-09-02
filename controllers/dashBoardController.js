@@ -8,10 +8,10 @@ exports.getDashBoard = asyncHandler(async(req,res)=>{
     const releaseCount = await db.getReleasesCount();
     const lowStockReleaseCount = await db.getReleasesCountByLowStock();
     const latestReleases = await db.getLatestReleases();
-    console.log(albumCount)
-    console.log(releaseCount)
-    console.log(lowStockReleaseCount)
-    console.log(latestReleases)
+    // console.log(albumCount)
+    // console.log(releaseCount)
+    // console.log(lowStockReleaseCount)
+    // console.log(latestReleases)
     res.render("dashBoard" , {
         allReleases : latestReleases , 
         albumCount , 
@@ -24,6 +24,7 @@ exports.getDashBoard = asyncHandler(async(req,res)=>{
 exports.displayLowStockReleases = asyncHandler(async(req,res)=>{
     const lowStockReleases = await db.getLowStockReleases();
     res.render("lowStockReleases" , {
+        title:"Low Stock Releaases",
         allReleases : lowStockReleases
     })
 });

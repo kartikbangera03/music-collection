@@ -1,5 +1,7 @@
 const {Client}=require("pg");
+
 require("dotenv").config();
+
 const SQL = `
 
 CREATE TABLE IF NOT EXISTS artists (
@@ -159,9 +161,11 @@ VALUES
 
 async function main() {
     console.log("seeding...");
+    console.log("Starting Connection.....");
     const client = new Client({
       connectionString: process.env.DATABASE_URL,
     });
+    console.log("Connection Established")
     await client.connect();
     await client.query(SQL);
     await client.end();

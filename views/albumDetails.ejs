@@ -9,7 +9,7 @@
         <div class="rightContainer">
             <%- include('./header'); %>
             
-            <div class="bodyContainer">
+            <div class="infoContainer">
                 <%- include('./dialogDelete', {name : "Album",linkedItems : "Releases", itemName: album[0].albumname, deleteLink : "/album/"+ album[0].id +"/delete"}); %>
                 <div class="artistDetails">
                     <div class="artistImage">

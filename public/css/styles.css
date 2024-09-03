@@ -396,6 +396,9 @@ dialog{
 .releaseCard{
     height: 265px;
 }
+.withoutArtistReleaseCard{
+    height: 250px;
+}
 
 .withoutYearCard{
     height: 215px;
@@ -431,3 +434,11 @@ dialog{
     color:gray;
 }
 
+.cardContainer{
+    box-sizing: border-box;
+    padding-left : 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    background-color: #ececec;
+    row-gap: 20px;
+}

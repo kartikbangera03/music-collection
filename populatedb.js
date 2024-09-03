@@ -165,9 +165,11 @@ async function main() {
     const client = new Client({
       connectionString: process.env.DATABASE_URL,
     });
-    console.log("Connection Established")
+    console.log("Client Created.........")
     await client.connect();
+    console.log("Connection Established....")
     await client.query(SQL);
+    console.log("Query Executed.........")
     await client.end();
     console.log("done");
   }

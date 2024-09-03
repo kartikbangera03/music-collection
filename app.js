@@ -1,4 +1,5 @@
 // app.js
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const musicRouter = require("./routes/musicRouter");
@@ -9,5 +10,5 @@ app.use("/", musicRouter);
 app.use(express.static(__dirname + '/public'));
 
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT ;
 app.listen(PORT, () => console.log(`Express app listening on port ${PORT}!`));

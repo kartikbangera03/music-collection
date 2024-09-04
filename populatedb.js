@@ -75,7 +75,6 @@ VALUES
 ('Atlantic Records',1947),
 ('Aftermath Entertainment',1996),
 ('Asylum Records',1971),
-('Atlantic Records',1947),
 ('Epic Records', 1953 ),
 ('Big Machine Records' , 2005),
 ('Republic Records', 1995),
@@ -129,8 +128,8 @@ VALUES
 ('Justice' ,13,13,2, 'https://upload.wikimedia.org/wikipedia/en/thumb/0/08/Justin_Bieber_-_Justice.png/220px-Justin_Bieber_-_Justice.png' , '2021-03-19' ),
 ('Cowboy Carter' , 9 , 12 , 9 , 'https://upload.wikimedia.org/wikipedia/en/a/aa/Beyonc%C3%A9_-_Cowboy_Carter.png' , '2024-03-29' ),
 ('Renaissance' , 9 , 12 , 10 , 'https://upload.wikimedia.org/wikipedia/en/a/ad/Beyonc%C3%A9_-_Renaissance.png' , '2022-07-29' ),
-('Trouble' , 11 , 14 , 11 , 'https://upload.wikimedia.org/wikipedia/en/7/75/AkonTrouble.jpg' , '2004-06-29' ),
-('Freedom' , 11 , 14 , 1 , 'https://upload.wikimedia.org/wikipedia/en/thumb/0/0a/AkonFreedom.PNG/220px-AkonFreedom.PNG' , '2008-12-01' )
+('Trouble' , 11 , 13 , 11 , 'https://upload.wikimedia.org/wikipedia/en/7/75/AkonTrouble.jpg' , '2004-06-29' ),
+('Freedom' , 11 , 13 , 1 , 'https://upload.wikimedia.org/wikipedia/en/thumb/0/0a/AkonFreedom.PNG/220px-AkonFreedom.PNG' , '2008-12-01' )
 ;
 
 INSERT INTO releases(album_id, format , price , stock , barcode , imageurl )
@@ -155,6 +154,46 @@ VALUES
 (17 , 'Cassette' , 7.24 , 2 , 963258741159 , 'https://i.ebayimg.com/images/g/mIsAAOSwKRdmVeJw/s-l400.jpg'),
 (10 , 'CD' , 38.5 , 4 , 458591629451 , 'https://i.discogs.com/2VFFKSHjxcq4_tq_8ND5xDj8HRoHU2hZ3H3AasHTuw8/rs:fit/g:sm/q:40/h:300/w:300/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwNzM3/OTE1LTE1MDY0NjI1/NzgtODYyNi5qcGVn.jpeg')
 ;
+DELETE FROM releases 
+WHERE id not in (
+                SELECT min(id) 
+                FROM releases
+                GROUP BY album_id , format 
+                );
+
+DELETE FROM albums 
+WHERE id not in (
+                SELECT min(id) 
+                FROM albums
+                GROUP BY albumname , artist_id 
+                );  
+
+                
+DELETE FROM labels 
+WHERE id not in (
+                SELECT min(id) 
+                FROM labels
+                GROUP BY labelname , yearfounded
+                );
+
+DELETE FROM genres 
+WHERE id not in (
+                SELECT min(id) 
+                FROM genres
+                GROUP BY genrename
+                );    
+                
+DELETE FROM artists 
+WHERE id not in (
+                SELECT min(id) 
+                FROM artists
+                GROUP BY firstname , lastname , birthdate
+                ); 
+
+               
+
+
+
 `;
 
 

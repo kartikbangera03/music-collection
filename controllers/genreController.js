@@ -25,12 +25,6 @@ exports.getGenreById = asyncHandler(async(req,res)=>{
     const genre = await db.getGenreById(req.params.id);
     const albums  = await db.getAlbumsByGenreId(req.params.id);
     const releases  = await db.getAllAlbumsAndReleasesByGenreId(req.params.id);
-    // console.log("GENRE DETAILS..............")
-    // console.log(genre)
-    // console.log("ALBUMS")
-    // console.log(albums)
-    // console.log("RELEASES")
-    // console.log(releases);
     
     res.render("genreDetails",{
             genre : genre,
@@ -50,7 +44,7 @@ exports.updateGenreById =  asyncHandler(async(req,res)=>{
 exports.updateGenreByIdPost =  asyncHandler(async(req,res)=>{
     const {genreName} = req.body;
     await db.updateGenre(req.params.id , genreName);
-    res.redirect("/");
+    res.redirect("/category/genres");
 })
 
 

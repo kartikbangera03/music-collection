@@ -64,8 +64,9 @@ exports.updateAlbumById = asyncHandler(async(req,res)=>{
 
 // -------------------------------------
 exports.updateAlbumByIdPost = asyncHandler(async(req,res)=>{
+    const albumImageLink = "https://iili.io/HlHy9Yx.png";
     const {albumName , artist , label , genre , releaseDate , imageUrl } = req.body;
-    await db.updateAlbum(req.params.id , albumName , artist , label , genre , releaseDate , imageUrl);
+    await db.updateAlbum(req.params.id , albumName , artist , label , genre , releaseDate , imageUrl==""?albumImageLink:imageUrl);
     res.redirect("/category/albums");
 });
 

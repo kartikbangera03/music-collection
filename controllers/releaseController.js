@@ -55,8 +55,10 @@ exports.updateReleaseById =  asyncHandler(async(req,res)=>{
 
 
 exports.updateReleaseByIdPost =  asyncHandler(async(req,res)=>{
+    const releaseImageLink = "https://static.vecteezy.com/system/resources/thumbnails/034/737/636/small_2x/vinyl-record-in-pack-vector.jpg";
+
     const {album , format , price , stock ,barcode , imageUrl} = req.body;
-    await db.updateRelease(req.params.id , album , format , price , stock ,barcode , imageUrl);
+    await db.updateRelease(req.params.id , album , format , price , stock ,barcode , imageUrl==""?releaseImageLink:imageUrl);
     res.redirect("/category/releases");
 })
 

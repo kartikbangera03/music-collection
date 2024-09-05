@@ -25,11 +25,11 @@
                                 <% if(typeof album === "undefined") { %>
                                     <option value="" disabled="true" selected>--Please Select Artist---</option>
                                     <% allArtists.forEach((artist)=>{ %>
-                                        <option value= <%=artist.id %> > <%=artist.firstname + " " + artist.lastname%> </option>
+                                        <option value= <%=artist.id %> > <%= artist.firstname + " " + artist.lastname %> </option>
                                     <% }) %>
                                  <% }else{ %>
                                     <% allArtists.forEach((artist)=>{ %>
-                                        <option value= "<%=artist.id%>"  <%=artist.id === album[0].artist_id ? 'selected' : '' %> > <%=artist.firstname%> </option> 
+                                        <option value= "<%=artist.id%>"  <%=artist.id === album[0].artist_id ? 'selected' : '' %> > <%= artist.firstname + " " + artist.lastname %> </option> 
                                     <% }) %>
                                 <% } %>
                            

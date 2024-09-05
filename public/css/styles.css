@@ -160,6 +160,9 @@ body{
     padding-top: 70px;
 }
 
+.missingPaddingTop{
+    padding-top: 100px;
+}
 
 .artistDetails{
     display: flex;
@@ -271,6 +274,13 @@ input , select{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    gap: 30px;
+}
+
+.dashBoardContainer{
+    width: 100%;
+    /* background-color: aqua; */
+    display: flex;
     gap: 30px;
 }
 
@@ -399,6 +409,7 @@ dialog{
 .releaseCard{
     height: 265px;
 }
+
 .withoutArtistReleaseCard{
     height: 250px;
 }

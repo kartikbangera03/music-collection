@@ -1,34 +1,3 @@
-<!-- <html>
-    <head>
-        <%- include('./titleAndCssLink',{title:title}); %>
-    </head>
-    <body>   
-        <%- include('./sideBar'); %>
-        <div class="rightContainer">
-            <%- include('./header'); %>
-            <div class="infoContainer">
-                <div class="cardContainer">
-                    <div class="albumsCountCard countCard">
-                        <div class="countValue"><%=albumCount%> Total Albums</div>
-                        <a href="/category/albums"> More Info</a>
-                    </div>
-                    <div class="releasesCountCard countCard">
-                        <div class="countValue"><%=releaseCount%> Items in Stock</div>
-                        <a href="/category/releases"> More Info</a>
-                    </div>
-                    <div class="lowReleaseCountCard countCard">
-                        
-                        <div > <span class="countValue"><%=lowStockReleaseCount%></span>  Items Low in Stock</div>
-                        <a href="/lowStockReleases"> More Info</a>
-                    </div>
-                </div>
-                <%- include("showReleases" ,{allReleases : allReleases }) %>
-            </div>
-        </div>
-    </body>
-</html> -->
-
-
 <html>
     <head>
         <%- include('./titleAndCssLink',{title:title}); %>
@@ -39,9 +8,8 @@
         <div class="rightContainer">
             <%- include('./header'); %>
 
-            <div class="infoContainer">
-                <div class="infoContainer">
-                    <div class="cardContainer">
+                <div class="infoContainer missingPaddingTop">
+                    <div class="dashBoardContainer">
                         <div class="albumsCountCard countCard">
                             <div> <span class="countValue"><%=albumCount%> </span> Total Albums</div>
                             <a href="/category/albums">More Info <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
@@ -55,12 +23,9 @@
                             <div ><span class="countValue"><%=lowStockReleaseCount%></span>  Items Low in Stock</div>
                             <a href="/lowStockReleases"> More Info <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
                         </div>
-                    </div>
-                    <%- include("showReleases" ,{allReleases : allReleases }) %>
-                </div>
-
-            </div>
-            
+                    </div>                  
+                    <%- include("showReleases" ,{allReleases : allReleases }) %>          
+                </div>            
         </div>
     </body>
 </html>
